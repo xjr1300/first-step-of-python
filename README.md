@@ -81,6 +81,8 @@ fn fibonacci(n: u32) -> u32 {
 }
 ```
 
+Pythonは処理が遅いにも関わらず、機械学習や画像処理に利用される理由は、コストの高い処理を`C`言語で記述されたプログラム（ライブラリ）に移譲して、結果を受け取っているからです。
+
 ## Pythonのインストール
 
 [Python公式サイト](https://www.python.org/)の[ダウンロードページ](https://www.python.org/downloads/)にWebブラウザでアクセスして、`Download Python 3.x.x`ボタンをクリックします。
@@ -833,7 +835,7 @@ if __name__ == "__main__":
 
 ./movies/variable-scopes.mov
 
-プロジェクトディレクトリに`scopes.py`ファイルを作成して、次のコードを入力／実行してください。
+プロジェクトディレクトリに`scopes1.py`ファイルを作成して、次のコードを入力／実行してください。
 `print`関数をコメントアウトしていおり、プログラムはエラーなしで実行されます。
 
 しかし、それぞれの`print`関数をコメントアウトを解除して実行すると、エラー（例外）が発生します。
@@ -855,7 +857,8 @@ if __name__ == "__main__":
     if True:
         y = 2
 
-    # ウソ: 変数`y`は`if`文のスコープで宣言されているため参照できない
+    # 知らんかった
+    # 右に記述したことは誤り: 変数`y`は`if`文のスコープで宣言されているため参照できない
     print(y)
 
     if True:
@@ -864,3 +867,72 @@ if __name__ == "__main__":
         if True:
             z = 10
 ```
+
+モジュール（ファイル）レベルで宣言された変数は、プログラム全体をスコープとするグローバルスコープを持ちます。
+関数内でグローバール変数を利用するためには、変数名の衝突を避けるため、その変数を`global`キーワードで宣言する必要があります。
+
+プロジェクトディレクトリに`scopes2.py`ファイルを作成して、次のコードを入力／実行してください。
+
+```python
+import sys
+
+x = 100
+
+
+def foo():
+    # 関数内でグローバル変数の参照を試行
+    # しかし、変数がローカルスコープで束縛されていない（宣言されていない）ことを
+    # 示す`UnboundLocalError`例外が発生するため、例外処理してプログラムが
+    # クラッシュすることを避ける
+    try:
+        print("x in foo func:", x)
+    except UnboundLocalError as e:
+        print(f"UnboundLocalError: {e}", file=sys.stderr)
+
+    # 関数内でグローバル変数と同じ名前の変数を宣言
+    # この変数`x`は`foo`関数のローカル変数であり、`foo`関数の終了とともに破棄
+    # される。
+    # また、グローバル変数`x`は、見えなくなる
+    x = 300
+    print("x is a local variable in foo func:", x)
+
+
+def bar():
+    # `x`はグローバル変数であることを宣言
+    global x
+
+    # 関数内でグローバル変数`x`を参照
+    print("x in bar func:", x)
+
+    # 関数内でグローバル変数`x`の値を変更
+    x = 400
+    print("x was changed in bar func:", x)
+
+
+if __name__ == "__main__":
+    # 関数の外でグローバル変数`x`を参照
+    print("x:", x)
+
+    # 関数の外でグローバル変数`x`の値を変更
+    x = 200
+    print("x after changing:", x)
+
+    print("\n--- go to foo func ---")
+    foo()
+    print("--- return from foo func ---\n")
+
+    print("x:", x)
+
+    print("\n--- go to bar func ---")
+    bar()
+    print("--- return from bar func ---\n")
+
+    print("x:", x)
+
+    # グローバル変数`x`が400出ない場合、プログラムがクラッシュ
+    assert x == 400
+```
+
+グローバル変数の使用はプログラムが複雑になると、プログラムの見通しが悪くなるため、避けることが推奨されます。
+実際にグローバル変数を使用する場面は少ないです。
+変数を宣言したら、関数の引数として渡すことを推奨します。
