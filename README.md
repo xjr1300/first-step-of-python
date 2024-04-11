@@ -111,7 +111,7 @@ VSCodeのインストーラーには、次を入力してください。
 
 - 使用許諾契約書の同意: 同意する
 - インストール先の指定: デフォルト
-- スタートメニューフォルダーの指定: デフォルト
+- スタートメニューディレクトリーの指定: デフォルト
 - 追加タスクの選択
   - アイコンを追加する:
     - デスクトップ上にアイコンを作成する: 任意
@@ -262,3 +262,32 @@ exit()
 > `...`が表示されている場合、ブロック内のコードを入力する必要があることを示しています。
 
 インタープリタに`exit()`と入力して`Enter`キーを押すと、Pythonのインタープリタが終了します(`Ctrl+d`でも終了できます)。
+
+## 言語説明
+
+### プロジェクトの作成
+
+1. エクスプローラーを開き、例えば`C:\Users\<user-identifier>\Documents`ディレクトリ(フォルダ、`PC > ドキュメント`と表示されています)に`py_tutorial`ディレクトリを作成します。
+2. 作成した`py_tutorial`ディレクトリを右クリックして、表示されたコンテキストメニューから`Codeで開く`を選択して、`py_tutorial`をカレントディレクトリとしてVSCodeが起動します。
+
+`Do you trust the authors of the files in this folder?`と表示された場合、**全面的に信用**するため、`Truest the authors of all file in the parent folder 'Documents'`をチェックして、`Yes, I trust the authors`ボタンをクリックしてください。
+
+以降`py_tutorial`ディレクトリを**プロジェクトディレクトリ**と呼びます。
+また、ファイルやディレクトリのパスは、カレントディレクトリからの相対パスで表現します。
+
+```text
+py_tutorial
+├─cart
+│  └─templates
+├─coupons
+│  └─migrations
+└─locale
+    └─es
+        └─LC_MESSAGES
+        └─payment
+```
+
+`cart`のパスは、`cart`または`.\cart`と表現します。
+`LC_MESSAGES`のパスは、`locale\es\LC_MESSAGES`または`.\locale\es\LC_MESSAGES`と表現します。
+最初の`.`は現在のディレクトリを示しており、つまり`py_tutorial`ディレクトリです。
+ただし、`cart`ディレクトリを`py_tutorial\cart`と表現できません。これは存在しない`py_tutorial\py_tutorial\cart`を示します。
