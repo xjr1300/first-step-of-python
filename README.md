@@ -674,7 +674,8 @@ Pythonにおける変数とは、データをメモリに格納するときに�
 
 ![変数の可視化](./images/variable-visualization.png)
 
-./movies/allocation-visualization.mov
+変数の可視化動画:
+<https://dainichiconsul.box.com/s/82slhtssg9a9njww0sa9qec9opm6dzxg>
 
 Pythonの関数は変数に代入でき、変数に代入できたり、関数の引数や戻り値に関数を指定できる**高階関数**です。
 
@@ -779,7 +780,10 @@ if __name__ == "__main__":
     print(f"s = '{s}'")
 ```
 
-![値渡し](./images/call-by-value.png)
+![引数の値渡し](./images/call-by-value.png)
+
+引数の値渡し動画:
+<https://dainichiconsul.box.com/s/zt8pa38bkimxzs40ayjeljfbmjjgod6s>
 
 list型、dict型、set型は**参照渡し**です。
 
@@ -797,7 +801,10 @@ if __name__ == "__main__":
 
 ```
 
-![参照渡し](./images/call-by-reference.png)
+![引数の参照渡し](./images/call-by-reference.png)
+
+引数の参照渡し動画:
+<https://dainichiconsul.box.com/s/m3vvpcq1q7m98i3z3tpmlwalt3rrc1jc>
 
 ### スコープ
 
@@ -833,7 +840,8 @@ if __name__ == "__main__":
 上記コードで宣言された変数や関数がどのようなスコープで有効か動画で確認します。
 変数や関数がスコープから外れると、削除されることを確認してください。
 
-./movies/variable-scopes.mov
+変数と関数のスコープの動画:
+<https://dainichiconsul.box.com/s/ni2zzbvxtss476ophqrwhig24wmpjt38>
 
 プロジェクトディレクトリに`scopes1.py`ファイルを作成して、次のコードを入力／実行してください。
 `print`関数をコメントアウトしていおり、プログラムはエラーなしで実行されます。
