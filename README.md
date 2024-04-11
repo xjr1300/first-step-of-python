@@ -5,7 +5,7 @@
 
 ## Pythonのインストール
 
-[Python公式サイト](https://www.python.org/)の[ダウンロードページ](https://www.python.org/downloads/)にアクセスして、`Download Python 3.x.x`ボタンをクリックします。
+[Python公式サイト](https://www.python.org/)の[ダウンロードページ](https://www.python.org/downloads/)にWebブラウザでアクセスして、`Download Python 3.x.x`ボタンをクリックします。
 
 ![Pythonダウンロードページ](./images/python-download-page.png)
 
@@ -32,3 +32,38 @@ set PATH=%PATH%;C:\Users\d12272\AppData\Local\Programs\Python\Python312\Scripts\
 ```
 
 ![Pythonバージョン確認](./images/python-version.png)
+
+## Visual Studio Code(VSCode)のインストール
+
+[VSCode公式サイト](https://azure.microsoft.com/ja-jp/products/visual-studio-code)にWebブラウザでアクセスして、`Visual Studio Codeをダウンロードする`ボタンをクリックします。
+表示された`Download Visual Studio Code`ページにある`Windows`ボタンをクリックします。
+`Windows`ボタンをクリックすると最新のVSCodeのインストーラーの保存を求められるため、自分のPCにインストーラーを保存します。
+VSCodeのインストーラーのダウンロードが終了したら、VSCodeのインストーラーをダブルクリックして実行します。
+
+インストーラーを実行した時、「このインストーラーは管理者としてVSCodeを実行することを意図していない・・・」などの警告が表示されるかもしれませんが、無視して`OK`ボタンをクリックしてください。
+
+VSCodeのインストーラーには、次を入力してください。
+
+- 使用許諾契約書の同意: 同意する
+- インストール先の指定: デフォルト
+- スタートメニューフォルダーの指定: デフォルト
+- 追加タスクの選択
+  - アイコンを追加する:
+    - デスクトップ上にアイコンを作成する: 任意
+  - その他:
+    - エクスプローラーのファイルコンテキストメニューに[Codeで開く]アクションを追加する: チェック推奨
+    - エクスプローラーのディレクトリコンテキストメニューに[Codeで開く]アクションを追加する: チェック推奨
+    - サポートされているファイルの種類のエディターとして、Codeを登録する: チェック推奨
+  - PATHへの追加(再起動後に使用可能): **チェック**
+- インストール準備完了
+  - `インストール`ボタンをクリック  
+
+VSCodeのインストール完了画面が表示されたら`完了`ボタンをクリックして、VSCodeのインストーラーを終了します。
+
+VSCodeが起動したらVSCodeのインストールは成功です。
+
+> タスクバーの検索ボックスに`code`と入力してVSCodeを起動できることを確認してください。
+> またインストーラーの画面で`エクスプローラーの〇〇コンテキストメニューに・・・`をチェックした場合は、エクスプローラーでファイルまたはディレクトリをマウスで右クリックして表示されるコンテキストメニューに`Codeで開く`メニューがあること、そのメニューをクリックしたときVSCodeが起動することを確認してください。
+
+  
+
