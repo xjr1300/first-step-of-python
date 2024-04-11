@@ -7,6 +7,7 @@
   - [Pythonのインストール](#pythonのインストール)
   - [Visual Studio Code(VSCode)のインストール](#visual-studio-codevscodeのインストール)
   - [Python拡張機能のインストール](#python拡張機能のインストール)
+  - [VSCodeのエディタ設定](#vscodeのエディタ設定)
   - [インタープリタの使用](#インタープリタの使用)
 
 ## Pythonの簡単な説明
@@ -151,6 +152,47 @@ Pythonコードは、条件判断した結果によって実行するコード�
 また、上記で説明したコードの範囲をインデントで表現することを、Pythonではブロックと呼びます。
 
 ![indent-rainbowの効果](./images/effect-of-indent-rainbow.png)
+
+## VSCodeのエディタ設定
+
+Pythonでコードを記述する場合、次のようなコーディングスタイルがあり[PEP8](https://peps.python.org/pep-0008/)として公開されています。
+
+- 文字エンコーディングはUTF-8
+- インデントはスペース4つ
+
+また、改行コードの標準は、Windowsでは`CRLF`、LinuxやMacでは`LF`です。
+PEP8に定められてはいませんが、`LF`が望ましいのではないかと考えています。
+
+> 共同開発する場合は、コーディングスタイルを統一することが重要です。
+
+上記コーディングスタイルを苦痛なく実現するために、VSCodeの設定を次の通り変更します。
+
+1. VSCodeで`Ctrl+Shift+P`を押して、コマンドパレットを表示します。
+2. コマンドパレットに`open user settings`と入力していくと、コマンドの候補がリストされるため`Preferences: Open User Settings`をマウスで選択します。
+3. テキスト入力欄に`editor: tab size`と入力して、表示された`Editor: Tab Size`の値を`4`に変更します。
+4. 同様に`editor: insert spaces`と入力して、表示された`Editor: Insert Spaces`をチェックします。
+5. 次に`files: eol`と入力して、表示された`Files: Eol`に`\n`を入力します。
+6. 最後に`files: encoding`と入力して、表示された`Files: Encoding`に`UTF-8`を入力します。
+
+- `Preferences: Open User Settings`
+
+![ユーザー設定](./images/open-user-settings.png)
+
+- `Editor: Tab Size`
+
+![タブサイズ](./images/tab-size.png)
+
+- `Editor: Insert Spaces`
+
+![スペース挿入](./images/insert-spaces.png)
+
+- `Files: Eol`
+
+![改行コード](./images/eol.png)
+
+- `Files: Encoding`
+
+![文字エンコーディング](./images/character-encoding.png)
 
 ## インタープリタの使用
 
