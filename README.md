@@ -186,6 +186,8 @@ PEP8に定められてはいませんが、`LF`が望ましいのではないか
 5. 次に`files: eol`と入力して、表示された`Files: Eol`に`\n`を入力します。
 6. 最後に`files: encoding`と入力して、表示された`Files: Encoding`に`UTF-8`を入力します。
 
+`eol`は`end of line(s)`の略です。
+
 VSCodeの設定は即座に反映されるため、`OK`ボタンをクリックするなどのアクションは必要ありません。
 
 - `Preferences: Open User Settings`
