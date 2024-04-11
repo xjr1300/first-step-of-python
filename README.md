@@ -1,9 +1,63 @@
 # Pythonの最初のステップ for Windows
 
 - [Pythonの最初のステップ for Windows](#pythonの最初のステップ-for-windows)
+  - [Pythonの簡単な説明](#pythonの簡単な説明)
+    - [Pythonの特徴](#pythonの特徴)
+    - [Pythonの欠点](#pythonの欠点)
   - [Pythonのインストール](#pythonのインストール)
   - [Visual Studio Code(VSCode)のインストール](#visual-studio-codevscodeのインストール)
   - [Python拡張機能のインストール](#python拡張機能のインストール)
+  - [インタープリタの使用](#インタープリタの使用)
+
+## Pythonの簡単な説明
+
+### Pythonの特徴
+
+- オープンソース
+- コードの記述がシンプルなインタプリタ言語
+- Python公式から提供される標準ライブラリが豊富
+- Pythonのエコシステムを形成するコミュニティのライブラリの開発が活発
+- 機械学習向けの言語として注目
+- 人気のあるプログラミング言語の1つで、人気は`JavaScript`に次いで２位(2024年)
+
+### Pythonの欠点
+
+- プログラムの実行速度が遅い
+- 型安全でない
+- 実行する前にプログラムに誤りがあることに気付きにくい
+- 明示的に型を示さないため、過去に実装したコードの可読性が低い
+- プログラムの可搬性が低い
+
+```python
+# pythonで実装したフィボナッチ数列の例
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+# pythonはタイプヒントにより、次のように関数を定義できるが、実行時には無視される。
+# def fibonacci(n: int) -> int:
+#     pass
+#
+# `mypy`などの静的型チェッカーを使うことで、実行前に型の不整合を検出できる。
+# ただし、正しくタイプヒントで表現することが難しい場合がある。
+# 次の場合、型をタイプヒントでどのように表現する???
+# d = { "a": 42, "b": "foo", "c": 3.47, "d": [1, ["a", "b", 3], "bar"]}
+```
+
+```rust
+/// rustで実装したフィボナッチ数列の例
+fn fibonacci(n: u32) -> u32 {
+    match n {
+        0 => 0,
+        1 => 1,
+        _ => fibonacci(n - 1) + fibonacci(n - 2),
+    }
+}
+```
 
 ## Pythonのインストール
 
@@ -95,3 +149,74 @@ Pythonコードは、条件判断した結果によって実行するコード�
 また、上記で説明したコードの範囲をインデントで表現することを、Pythonではブロックと呼びます。
 
 ![indent-rainbowの効果](./images/effect-of-indent-rainbow.png)
+
+## インタープリタの使用
+
+インタープリタを使用するためには、ターミナルを起動する必要があります(もしかしたら、すでに起動しているかもしれません)。
+VSCodeの[Terminal]メニューから[New Terminal]を選択すると、VSCodeの下部にターミナルが表示されます(Ctrl+Shift+@)。
+
+- コマンドプロンプト(MS-DOS)
+
+![DOS](./images/dos.png)
+
+- PowerShell
+
+![PowerShell](./images/power-shell.png)
+
+ターミナルに`python`と入力して`Enter`キーを押します。
+Pythonのインタープリタが起動し、`>>>`(プロンプト)が表示されれば、Pythonのインタープリタを使用できます。
+
+```dos
+C:\Users\xxx> python
+Python 3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+インタープリタに次を1行ずつ入力して、`Enter`キーを押して、どのように機能するか確認してください。
+
+```python
+print("Hello, Python!")
+1 + 2
+3 * 6
+12 / 4
+type(12 / 4)
+12 // 4
+type(12 // 4)
+13 / 4
+13 // 4
+13 % 4
+4**2
+10 + 10.5
+"hello, " + "world!"
+type(43)
+type("43")
+a = 43
+print(f"a = {a}")
+import math
+pi = math.pi
+pi
+math.sin(pi)
+math.sin(math.pi)
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+fibonacci(10)
+exit()
+```
+
+`def fibonacci(n):`と入力して`Enter`キーを押すと、次の行が`...`に変わります。
+関数のブロックを表現する必要があるため、`Tab`キーを押した後`if n == 0:`と入力して`Enter`キーを押します。
+それぞれの`return`文を入力する前に`Taq`キーを2回押す必要があります。
+`fibonacci`関数の最後の`return`文の後は、`Enter`キーを2回押すと`...`が消えて、次の行が`>>>`に変わります。
+
+> `...`が表示されている場合、ブロック内のコードを入力する必要があることを示しています。
+
+インタープリタに`exit()`と入力して`Enter`キーを押すと、Pythonのインタープリタが終了します(`Ctrl+d`でも終了できます)。
+
+```dos
