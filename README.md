@@ -2,7 +2,6 @@
 
 - [Pythonの最初のステップ](#pythonの最初のステップ)
   - [Pythonのインストール](#pythonのインストール)
-  - [Visual Studio Code(VSCode)のインストール](#visual-studio-codevscodeのインストール)
 
 ## Pythonのインストール
 
@@ -32,4 +31,4 @@ set PATH=%PATH%;C:\Users\d12272\AppData\Local\Programs\Python\Python312\Scripts\
 # 上記はPython3.12の場合です、異なるバージョンをインストールした場合は`Python<version>`の部分を適宜変更してください。
 ```
 
-## Visual Studio Code(VSCode)のインストール
+![Pythonバージョン確認](./images/python-version.png)
