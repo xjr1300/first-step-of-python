@@ -85,9 +85,18 @@ Pythonが正常にダウンロードされているか確認するために、�
 
 「内部コマンドまたは外部コマンド、操作可能なプログラムまたはバッチファイルとして認識されません。」などのエラーメッセージが表示された場合は、Pythonインタープリタへのパスが環境変数に設定されていない可能性があります。この場合、次をコマンドプロンプトで実行した後、再度`python --version`を実行してください。
 
+> 次はPython3.12の場合です、異なるバージョンをインストールした場合は`Python<version>`の部分を適宜変更してください。
+
+- PowerShellの場合
+
+```powershell
+ $ENV:Path+=";C:\Users\d12272\AppData\Local\Programs\Python\Python312\Scripts\"
+```
+
+- MS-DOSの場合
+
 ```dos
 set PATH=%PATH%;C:\Users\d12272\AppData\Local\Programs\Python\Python312\Scripts\
-# 上記はPython3.12の場合です、異なるバージョンをインストールした場合は`Python<version>`の部分を適宜変更してください。
 ```
 
 ![Pythonバージョン確認](./images/python-version.png)
@@ -174,6 +183,8 @@ PEP8に定められてはいませんが、`LF`が望ましいのではないか
 5. 次に`files: eol`と入力して、表示された`Files: Eol`に`\n`を入力します。
 6. 最後に`files: encoding`と入力して、表示された`Files: Encoding`に`UTF-8`を入力します。
 
+VSCodeの設定は即座に反映されるため、`OK`ボタンをクリックするなどのアクションは必要ありません。
+
 - `Preferences: Open User Settings`
 
 ![ユーザー設定](./images/open-user-settings.png)
@@ -199,18 +210,29 @@ PEP8に定められてはいませんが、`LF`が望ましいのではないか
 インタープリタを使用するためには、ターミナルを起動する必要があります(もしかしたら、すでに起動しているかもしれません)。
 VSCodeの[Terminal]メニューから[New Terminal]を選択すると、VSCodeの下部にターミナルが表示されます(Ctrl+Shift+@)。
 
-- コマンドプロンプト(MS-DOS)
-
-![DOS](./images/dos.png)
-
 - PowerShell
 
 ![PowerShell](./images/power-shell.png)
 
+- コマンドプロンプト(MS-DOS)
+
+![DOS](./images/dos.png)
+
 ターミナルに`python`と入力して`Enter`キーを押します。
 Pythonのインタープリタが起動し、`>>>`(プロンプト)が表示されれば、Pythonのインタープリタを使用できます。
 
-```dos
+- PowerShellの場合
+
+```
+PS C:\Users\xxx> python
+Python 3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+- MS-DOSの場合
+
+```
 C:\Users\xxx> python
 Python 3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
@@ -263,9 +285,7 @@ exit()
 
 インタープリタに`exit()`と入力して`Enter`キーを押すと、Pythonのインタープリタが終了します(`Ctrl+d`でも終了できます)。
 
-## 言語説明
-
-### プロジェクトの作成
+## チュートリアル用のプロジェクトの作成
 
 1. エクスプローラーを開き、例えば`C:\Users\<user-identifier>\Documents`ディレクトリ(フォルダ、`PC > ドキュメント`と表示されています)に`py_tutorial`ディレクトリを作成します。
 2. 作成した`py_tutorial`ディレクトリを右クリックして、表示されたコンテキストメニューから`Codeで開く`を選択して、`py_tutorial`をカレントディレクトリとしてVSCodeが起動します。
@@ -291,3 +311,48 @@ py_tutorial
 `LC_MESSAGES`のパスは、`locale\es\LC_MESSAGES`または`.\locale\es\LC_MESSAGES`と表現します。
 最初の`.`は現在のディレクトリを示しており、つまり`py_tutorial`ディレクトリです。
 ただし、`cart`ディレクトリを`py_tutorial\cart`と表現できません。これは存在しない`py_tutorial\py_tutorial\cart`を示します。
+
+## 仮想環境の作成
+
+PythonはOSにインストールされています。
+今後のプロジェクトでは、多種多彩なプログラムを実装することになります。
+しかし、将来を含むそれぞれのプロジェクトは、現在インストールされているPythonのバージョンで動作しないでしょう。
+
+また、それぞれのプロジェクトでは、色々なパッケージを導入して、プログラムの機能や開発速度を向上させます。
+ここで、パッケージ間のバージョン依存により、新しい機能が追加された最新バージョンのパッケージを利用する必要があったとします。
+しかし、あるプロジェクトが想定しているパッケージのバージョンと最新バージョンに互換性がない場合、最新バージョンを導入をあきらめなければならないかもしれません。
+
+> セマンティックバージョニングを採用している場合の、メジャーバージョンの増加(1.0.0 -> 2.0.0)は、後方互換性を維持していません。
+
+このため、Pythonのプログラムを実装する場合、そのプロジェクトのPythonバージョンやパッケージのバージョンが、OSにインストールされたPythonに影響を与えないように、別の環境を用意してプロジェクト用に環境を固定することが基本です。
+この別の環境のことを**Python仮想環境**または単に**仮想環境**と呼んでいます。
+
+プロジェクト用の仮想環境を作成して、作成した仮想環境を次の通り有効にします。
+1行目は、プロジェクトディレクトリ（カレントディレクトリ）に`.venv`ディレクトリを作成して、そのディレクトリに仮想環境を作成するコマンドです。
+2行目は、作成した仮想環境を有効にするコマンドです。
+
+- PowerShellの場合
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+- MS-DOSの場合
+
+```dos
+python -m venv .venv
+.venv\Scripts\activate.bat 
+```
+
+## VSCodeで仮想環境を選択
+
+Python拡張機能がプロジェクト用の仮想環境を認識できるように、次の通りVSCodeを設定します。
+
+1. `Ctrl+Shit+P`を押してコマンドパレットを表示します。
+2. 表示さえたコマンドパレットで`python: select interpreter`と入力して、表示されたリストから`Python: Select Interpreter`を選択します。
+3. 表示された仮想環境（OSにインストールされたPythonを含む）がリストされるため、表示された候補のパスを確認して`Python x.x.x ('.venv': venv) .\venv\Scripts\python.exe - Recommended`を選択します。
+
+「Pythonの仮想環境の有効化に成功しけど、ターミナルのプロンプトのインジケーターに"(.venv)"と表示されてないかもしれないよ」的なメッセージが表示されるかもしれません。
+その場合、単にそのメッセージを閉じるか、`Don't show again`をクリックしてください。
+`Don't show again`ボタンの下に`Python 3.12.3 ('.venv': venv)`と表示されていれば、仮想環境が有効になっています。
+
