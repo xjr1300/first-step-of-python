@@ -9,6 +9,9 @@
   - [Python拡張機能のインストール](#python拡張機能のインストール)
   - [VSCodeのエディタ設定](#vscodeのエディタ設定)
   - [インタープリタの使用](#インタープリタの使用)
+  - [チュートリアル用のプロジェクトの作成](#チュートリアル用のプロジェクトの作成)
+  - [仮想環境の作成](#仮想環境の作成)
+  - [VSCodeで仮想環境を選択](#vscodeで仮想環境を選択)
 
 ## Pythonの簡単な説明
 
@@ -83,13 +86,15 @@ Pythonが正常にダウンロードされているか確認するために、�
 コマンドプロンプトが起動したら、`python --version`と入力してEnterキーを押します。
 インストールしたPythonのバージョンが表示されればPythonのインストールは成功です。
 
+![Pythonバージョン確認](./images/python-version.png)
+
 「内部コマンドまたは外部コマンド、操作可能なプログラムまたはバッチファイルとして認識されません。」などのエラーメッセージが表示された場合は、Pythonインタープリタへのパスが環境変数に設定されていない可能性があります。この場合、次をコマンドプロンプトで実行した後、再度`python --version`を実行してください。
 
 > 次はPython3.12の場合です、異なるバージョンをインストールした場合は`Python<version>`の部分を適宜変更してください。
 
 - PowerShellの場合
 
-```powershell
+```ps
  $ENV:Path+=";C:\Users\d12272\AppData\Local\Programs\Python\Python312\Scripts\"
 ```
 
@@ -98,8 +103,6 @@ Pythonが正常にダウンロードされているか確認するために、�
 ```dos
 set PATH=%PATH%;C:\Users\d12272\AppData\Local\Programs\Python\Python312\Scripts\
 ```
-
-![Pythonバージョン確認](./images/python-version.png)
 
 ## Visual Studio Code(VSCode)のインストール
 
@@ -210,11 +213,11 @@ VSCodeの設定は即座に反映されるため、`OK`ボタンをクリック�
 インタープリタを使用するためには、ターミナルを起動する必要があります(もしかしたら、すでに起動しているかもしれません)。
 VSCodeの[Terminal]メニューから[New Terminal]を選択すると、VSCodeの下部にターミナルが表示されます(Ctrl+Shift+@)。
 
-- PowerShell
+- PowerShellの場合
 
 ![PowerShell](./images/power-shell.png)
 
-- コマンドプロンプト(MS-DOS)
+- コマンドプロンプト(MS-DOS)の場合
 
 ![DOS](./images/dos.png)
 
@@ -223,7 +226,7 @@ Pythonのインタープリタが起動し、`>>>`(プロンプト)が表示さ�
 
 - PowerShellの場合
 
-```
+```ps
 PS C:\Users\xxx> python
 Python 3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
@@ -232,7 +235,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 - MS-DOSの場合
 
-```
+```dos
 C:\Users\xxx> python
 Python 3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
@@ -332,7 +335,8 @@ PythonはOSにインストールされています。
 2行目は、作成した仮想環境を有効にするコマンドです。
 
 - PowerShellの場合
-```powershell
+
+```ps
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
@@ -341,7 +345,7 @@ python -m venv .venv
 
 ```dos
 python -m venv .venv
-.venv\Scripts\activate.bat 
+.venv\Scripts\activate.bat
 ```
 
 ## VSCodeで仮想環境を選択
@@ -352,7 +356,10 @@ Python拡張機能がプロジェクト用の仮想環境を認識できるよ�
 2. 表示さえたコマンドパレットで`python: select interpreter`と入力して、表示されたリストから`Python: Select Interpreter`を選択します。
 3. 表示された仮想環境（OSにインストールされたPythonを含む）がリストされるため、表示された候補のパスを確認して`Python x.x.x ('.venv': venv) .\venv\Scripts\python.exe - Recommended`を選択します。
 
+![仮想環境の選択](./images/select-venv.png)
+
 「Pythonの仮想環境の有効化に成功しけど、ターミナルのプロンプトのインジケーターに"(.venv)"と表示されてないかもしれないよ」的なメッセージが表示されるかもしれません。
 その場合、単にそのメッセージを閉じるか、`Don't show again`をクリックしてください。
 `Don't show again`ボタンの下に`Python 3.12.3 ('.venv': venv)`と表示されていれば、仮想環境が有効になっています。
 
+![ターミナルからの通知](./images/venv-terminal-message.png)
