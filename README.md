@@ -1323,7 +1323,7 @@ f = open("non-existent-file.txt")
 #### 再帰
 
 関数が自分自身を呼び出すことを再帰と呼びます。
-上記で提示した`factorial`関数は再帰関数です。
+上記で提示した`fibonacci`関数は再帰関数です。
 
 ```python
 def fibonacci(n):
