@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
     "asyncio",
+    "deque",
     "elif",
     "mypy",
     "numpy",
