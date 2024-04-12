@@ -4,6 +4,7 @@
     "elif",
     "mypy",
     "numpy",
-    "randint"
+    "randint",
+    "Traceback"
   ]
 }
