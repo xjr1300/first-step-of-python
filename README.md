@@ -176,7 +176,12 @@ fn fibonacci(n: u32) -> u32 {
 }
 ```
 
+Rustのコードに型は明示されていませんが、Rustは**静的型付き言語**で、型はコンパイラが推論します。
+Rustの言語サーバーが動作するVSCodeでは、型を表示する機能があります。
+
 ![VSCodeで表示したRustのコード](./images/rust-fibonacci.png)
+
+Pythonの型は実行時に決定されるため、**動的型付き言語**に分類されます。
 
 ## Pythonのインストール
 
