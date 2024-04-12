@@ -3,6 +3,7 @@
     "asyncio",
     "elif",
     "mypy",
+    "numpy",
     "randint"
   ]
 }
