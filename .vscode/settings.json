@@ -1,3 +1,8 @@
 {
-  "cSpell.words": ["elif", "mypy", "randint"]
+  "cSpell.words": [
+    "asyncio",
+    "elif",
+    "mypy",
+    "randint"
+  ]
 }
