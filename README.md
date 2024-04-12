@@ -480,10 +480,10 @@ python -m venv .venv
 
 ## VSCodeで仮想環境を選択
 
-Python拡張機能がプロジェクト用の仮想環境を認識できるように、次の通りVSCodeを設定します。
+Python拡張機能が本文書用の仮想環境を認識できるように、次の通りVSCodeを設定します。
 
 1. `Ctrl + Shit + P`を押してコマンドパレットを表示します。
-2. 表示さえたコマンドパレットで`python: select interpreter`と入力して、表示されたリストから`Python: Select Interpreter`を選択します。
+2. 表示されたコマンドパレットで`python: select interpreter`と入力して、表示されたリストから`Python: Select Interpreter`を選択します。
 3. 表示された仮想環境（OSにインストールされたPythonを含む）がリストされるため、表示された候補のパスを確認して`Python x.x.x ('.venv': venv) .\venv\Scripts\python.exe - Recommended`を選択します。
 
 ![仮想環境の選択](./images/select-venv.png)
