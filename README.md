@@ -28,6 +28,13 @@
     - [変数](#変数)
     - [関数](#関数)
     - [スコープ](#スコープ)
+    - [プログラムの制御構造](#プログラムの制御構造)
+      - [順次](#順次)
+      - [分岐](#分岐)
+        - [三項演算子](#三項演算子)
+      - [繰り返し](#繰り返し)
+      - [再帰](#再帰)
+      - [yield（いーるど）](#yieldいーるど)
 
 ## Pythonの簡単な説明
 
@@ -277,7 +284,7 @@ PEP8に定められてはいませんが、`LF`が望ましいのではないか
 
 上記コーディングスタイルを苦痛なく実現するために、VSCodeの設定を次の通り変更します。
 
-1. VSCodeで`Ctrl+Shift+P`を押して、コマンドパレットを表示します。
+1. VSCodeで`Ctrl + Shift + P`を押して、コマンドパレットを表示します。
 2. コマンドパレットに`open user settings`と入力していくと、コマンドの候補がリストされるため`Preferences: Open User Settings`をマウスで選択します。
 3. テキスト入力欄に`editor: tab size`と入力して、表示された`Editor: Tab Size`の値を`4`に変更します。
 4. 同様に`editor: insert spaces`と入力して、表示された`Editor: Insert Spaces`をチェックします。
@@ -311,7 +318,7 @@ VSCodeの設定は即座に反映されるため、`OK`ボタンをクリック�
 ## インタープリタの使用
 
 インタープリタを使用するためには、ターミナルを起動する必要があります(もしかしたら、すでに起動しているかもしれません)。
-VSCodeの[Terminal]メニューから[New Terminal]を選択すると、VSCodeの下部にターミナルが表示されます(Ctrl+Shift+@)。
+VSCodeの[Terminal]メニューから[New Terminal]を選択すると、VSCodeの下部にターミナルが表示されます(`Ctrl + Shift + @`)。
 
 - PowerShellの場合
 
@@ -386,7 +393,7 @@ exit()
 
 > `...`が表示されている場合、ブロック内のコードを入力する必要があることを示しています。
 
-インタープリタに`exit()`と入力して`Enter`キーを押すと、Pythonのインタープリタが終了します(`Ctrl+d`でも終了できます)。
+インタープリタに`exit()`と入力して`Enter`キーを押すと、Pythonのインタープリタが終了します(`Ctrl + D`でも終了できます)。
 
 ## チュートリアル用のプロジェクトの作成
 
@@ -452,7 +459,7 @@ python -m venv .venv
 
 Python拡張機能がプロジェクト用の仮想環境を認識できるように、次の通りVSCodeを設定します。
 
-1. `Ctrl+Shit+P`を押してコマンドパレットを表示します。
+1. `Ctrl + Shit + P`を押してコマンドパレットを表示します。
 2. 表示さえたコマンドパレットで`python: select interpreter`と入力して、表示されたリストから`Python: Select Interpreter`を選択します。
 3. 表示された仮想環境（OSにインストールされたPythonを含む）がリストされるため、表示された候補のパスを確認して`Python x.x.x ('.venv': venv) .\venv\Scripts\python.exe - Recommended`を選択します。
 
@@ -857,6 +864,9 @@ int型、float型、str型は**値渡し**です。
 
 プロジェクトディレクトリに、`functions3.py`ファイルを作成して、次のコードを入力／実行して出力される値が**変更されていない**ことを確認してください。
 
+`+=`演算子は、現在の値に右辺の値を加算して、その結果を左辺の変数に格納します。
+`n += 10`は、`n = n + 10`と同じです。
+
 ```python
 def call_by_int_value(n: int):
     n += 10
@@ -867,6 +877,7 @@ def call_by_float_value(f: float):
 
 
 def call_by_str_value(s: str):
+    # 文字列の連結
     s = s + "asdf"
 
 
@@ -924,6 +935,7 @@ def foo():
     a = 10
     print("foo: ", a)
 
+    # 関数内で別の関数を定義
     def bar():
         b = 11
         print("bar: ", b)
@@ -1048,3 +1060,258 @@ if __name__ == "__main__":
 グローバル変数の使用はプログラムが複雑になると、プログラムの見通しが悪くなるため、避けることが推奨されます。
 実際にグローバル変数を使用する場面は少ないです。
 変数を宣言したら、関数の引数として渡すことを推奨します。
+
+### プログラムの制御構造
+
+Pythonにおけるプログラムの制御構造には、次のようなものがあります。
+
+- 順次
+- 分岐
+  - 三項演算子
+- 繰り返し
+- 例外処理
+- 再帰
+- yield
+
+#### 順次
+
+コードの上から下に順番に実行されるプログラムの制御構造です。
+
+#### 分岐
+
+条件によって、プログラムの実行経路を変更するプログラムの制御構造です。
+Pythonでは`if`文を使用して、条件によって実行経路を変更します。
+`if`文と`elif`文で条件を複数指定した場合、条件が成立した最初のブロックが実行され、他のブロックは無視されます。
+
+```python
+# パターン1: 条件が成立したときに実行したいコードがある場合
+if 条件:
+    条件が成立したときに実行したいコード
+
+# パターン2: 条件が成立したとき、条件が成立しなかったときに実行したいコードがある場合
+if 条件:
+    条件が成立したときに実行したいコード
+else:
+    条件が成立しなかったときに実行したいコード
+
+# パターン3: 条件が複数あり、それぞれの条件に対して実行したいコードがある場合
+if 条件1:
+    条件1が成立したときに実行したいコード
+elif 条件2:
+    条件2が成立したときに実行したいコード
+elif 条件3:
+    条件3が成立したときに実行したいコード
+...
+elif 条件n:
+    条件nが成立したときに実行したいコード
+
+# パターン4: 条件が複数あり、それぞれの条件に対して実行したいコードがあり、
+# すべての条件が成立しなかったときに実行したいコードがある場合
+if 条件1:
+    条件1が成立したときに実行したいコード
+elif 条件2:
+    条件2が成立したときに実行したいコード
+elif 条件3:
+    条件3が成立したときに実行したいコード
+...
+elif 条件n:
+    条件nが成立したときに実行したいコード
+else:
+    すべての条件が成立しなかったときに実行したいコード
+```
+
+##### 三項演算子
+
+プログラムを実装しているとき、条件によって変数に異なる値を代入したい場合があります。
+上記で説明した通常の`if`文を使用するとコードが冗長になるため、`x = val1 if 条件 else val2`という形式の三項演算子があります。
+
+プロジェクトディレクトリに`ternary_operator.py`ファイルを作成して、次のコードを入力／実行してください。
+`if`文で処理した結果と、三項演算子で処理した結果が同じであることを確認してください。
+
+```python
+import random
+
+n = random.randint(1, 100)
+
+# 通常の`if`文で分岐して適切な値を得る
+if n % 2 == 0:
+    s = "even"
+else:
+    s = "odd"
+print(s)
+
+# 上記`if`文の処理と同じ結果を三項演算子を使用して簡潔に得る
+s = "even" if n % 2 == 0 else "odd"
+print(s)
+```
+
+#### 繰り返し
+
+Pythonでは、`for`文と`while`文を使用して、繰り返し構造を実装します。
+
+- `for`文
+  - イテラブルオブジェクト（リスト、タプル、辞書、集合、文字列など）の要素を順番に取り出して処理
+  - `range`関数を使用して、指定した回数だけ繰り返し処理を行う
+- `while`文
+  - 条件が成立している間、処理を繰り返し実行
+  - 無限に繰り返ししたい場合
+
+プロジェクトディレクトリに`loops.py`ファイルを作成して、次のコードを入力／実行してください。
+プログラムの末尾の`while`文は、無限に繰り返されるため、`Ctrl + C`を押して、プログラムを終了してください。
+
+```python
+import time
+
+# for文
+print("--- for statements ---")
+# 指定した回数だけ繰り返し
+for i in range(5):
+    print(i)
+print()
+time.sleep(3)
+
+# リストの要素を順に処理
+for i in [1, 2, 3, 4, 5]:
+    print(i)
+print()
+time.sleep(3)
+
+# 文字列を1文字ずつ順に処理
+for c in "hello":
+    print(c)
+print()
+time.sleep(3)
+
+# 辞書に格納されたキーと値のペアを処理（順番は保証されない）
+for key, value in {"a": 1, "b": 2, "c": 3}.items():
+    print(key, value)
+print()
+time.sleep(3)
+
+# while文
+print("--- while statements ---")
+i = 0
+while i < 5:
+    print(i)
+    i += 1
+print()
+time.sleep(3)
+
+# 無限ループ
+while True:
+    print("infinite loop")
+    time.sleep(1)
+print()
+time.sleep(3)
+```
+
+#### 再帰
+
+関数が自分自身を呼び出すことを再帰と呼びます。
+上記で提示した`factorial`関数は再帰関数です。
+
+```python
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    # 関数自身を再度呼び出し
+    return fibonacci(n - 2) + fibonacci(n - 1)
+```
+
+整数の階乗(`n1`)を求める処理を再帰関数で実装できます。
+プロジェクトディレクトリに`factorial.py`ファイルを作成して、次のコードを入力／実行してください。
+
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
+
+
+if __name__ == "__main__":
+    value = factorial(10)
+    print(value)
+```
+
+[再帰関数の動作](https://dainichiconsul.box.com/s/pfm01ejegieaugwoawexgnf3mhqc3hq9)
+
+#### yield（いーるど）
+
+`yield`は、**関数を一時的に中断して現時点での値を返し、次回の呼び出し時に中断した箇所から再開**する制御構造です。
+
+`list`、`tuple`、`dict`、`set`、`str`などは、順に要素を取り出すことができるオブジェクト（イテラブルオブジェクト）であるため、`for`文の`in`で要素を順に取り出して処理することができます。
+
+`yield`を説明するためには、**ジェネレーター**や**イテレーター**などの概念を理解する必要があるため、次の説明は参考として紹介します。
+
+---
+
+`list`は**イテラブル**であり、反復操作可能な**イテレーター**を返す***スペシャルメソッド**`__iter__`を実装しています。
+イテレーターは、スペシャルメソッド`__next__`メソッドを実装しており、次の要素を返すことができます。
+もし、次の要素がない場合、`StopIteration`例外を発生させます。
+
+```python
+# ./iterator.py
+from typing import Self
+
+
+# `max - 1`までの数値を順番に返すイテレーター
+class NumberIterator:
+    def __init__(self, max: int) -> None:
+        self.max = max
+        self.current = 0
+
+    def __iter__(self) -> Self:
+        return self
+
+    def __next__(self) -> int:
+        if self.max <= self.current:
+            raise StopIteration()
+        returning = self.current
+        self.current += 1
+        return returning
+
+
+iter = NumberIterator(5)
+for value in iter:
+    print(value)
+
+print()
+
+iter = NumberIterator(5)
+print(iter.__next__())  # 0
+print(iter.__next__())  # 1
+print(iter.__next__())  # 2
+print(iter.__next__())  # 3
+print(iter.__next__())  # 4
+print(iter.__next__())  # StopIteration例外発生
+```
+
+> **ジェネレーター**は、`yield`を使用して、関数を一時的に中断して値を返し、次回の呼び出し時に中断した箇所から再開することができる関数です。
+> 前にコードで使用した`range`関数は**ジェネレーター関数**で、`yield`を使用して、一時的に関数の処理を中断しながら、指定した範囲の数値を順に返しています。
+> **ジェネレーター**は、**イテレーター**です。
+
+```python
+from typing import Generator
+
+
+# `max - 1`までの値を順に返すジェネレーター関数
+def number_generator(max: int) -> Generator[int, None, None]:
+    for i in range(max):
+        yield i
+
+
+for value in number_generator(5):
+    print(value)
+
+print()
+
+iter = number_generator(5)
+print(iter.__next__())  # 0
+print(iter.__next__())  # 1
+print(iter.__next__())  # 2
+print(iter.__next__())  # 3
+print(iter.__next__())  # 4
+print(iter.__next__())  # StopIteration例外発生
+```
