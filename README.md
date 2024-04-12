@@ -57,8 +57,7 @@ def fibonacci(n):
         return 0
     elif n == 1:
         return 1
-    else:
-        return fibonacci(n - 1) + fibonacci(n - 2)
+    return fibonacci(n - 2) + fibonacci(n - 1)
 
 # pythonはタイプヒントにより、次のように関数を定義できるが、実行時には無視される。
 # def fibonacci(n: int) -> int:
@@ -82,6 +81,87 @@ fn fibonacci(n: u32) -> u32 {
 ```
 
 Pythonは処理が遅いにも関わらず、機械学習や画像処理に利用される理由は、コストの高い処理を`C`言語で記述されたプログラム（ライブラリ）に移譲して、結果を受け取っているからです。
+
+PythonとRustで40番目のフィボナッチ数列を計算したときの時間は次のとおりです。
+
+| 言語   | 実行時間(secs) |
+| ------ | -------------: |
+| Python |          11.68 |
+| Rust   |           0.33 |
+
+実験で試したコードは次です。
+
+- Pythonのコード
+
+```python
+import sys
+import time
+
+
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    return fibonacci(n - 2) + fibonacci(n - 1)
+
+
+if __name__ == "__main__":
+    args = sys.argv
+    if len(args) != 2:
+        print("expected one argument", file=sys.stderr)
+        sys.exit(1)
+    try:
+        n = int(args[1])
+    except ValueError:
+        print("expected an integer number", file=sys.stderr)
+        sys.exit(1)
+
+    # フィボナッチ数を求める
+    started = time.time()
+    value = fibonacci(n)
+    finished = time.time()
+    elapsed = finished - started
+    print(f"fibonacci value: {value} ({elapsed:.2f} seconds)")
+```
+
+- Rustのコード
+
+```rust
+use anyhow::{anyhow, bail};
+
+fn main() -> anyhow::Result<()> {
+    let mut args = std::env::args();
+    if args.len() != 2 {
+        bail!("expected one argument")
+    }
+    let _ = args.next();
+    let n = args
+        .next()
+        .unwrap()
+        .parse::<u32>()
+        .map_err(|e| anyhow!(e))?;
+
+    // フィボナッチ数を求める
+    let started = std::time::SystemTime::now();
+    let value = fibonacci(n);
+    let elapsed = started.elapsed().unwrap();
+    let elapsed = elapsed.as_secs_f32();
+    println!("fibonacci value: {value} ({elapsed:.2} seconds)");
+
+    Ok(())
+}
+
+fn fibonacci(n: u32) -> u32 {
+    match n {
+        0 => 0,
+        1 => 1,
+        _ => fibonacci(n - 2) + fibonacci(n - 1),
+    }
+}
+```
+
+![VSCodeで表示したRustのコード](./images/rust-fibonacci.png)
 
 ## Pythonのインストール
 
