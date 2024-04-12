@@ -39,6 +39,7 @@
       - [コンテキストマネージャ](#コンテキストマネージャ)
       - [非同期処理](#非同期処理)
     - [内包表記](#内包表記)
+    - [デコレーター](#デコレーター)
 
 ## Pythonの簡単な説明
 
@@ -93,7 +94,7 @@ fn fibonacci(n: u32) -> u32 {
 
 Pythonは処理が遅いにも関わらず、機械学習や画像処理に利用される理由は、コストの高い処理を`C`言語で記述されたプログラム（ライブラリ）に移譲して、結果を受け取っているからです。
 
-PythonとRustで40番目のフィボナッチ数列を計算したときの時間は次のとおりです。
+PythonとRustで40項のフィボナッチ数列を計算したときの時間は次のとおりです。
 
 | 言語   | 実行時間(secs) |
 | ------ | -------------: |
@@ -1436,3 +1437,171 @@ print(l3)
 d1 = {n: n**2 for n in range(10)}
 print(d1)
 ```
+
+### デコレーター
+
+前にフィボナッチ数列を計算しましたが、項が大きくなると処理時間が急激に増加します。
+それは、同じ項を何度も計算しているためです。
+項別にフィボナッチ数を計算する回数を次に示します。
+
+- 項0: f(0): 1
+- 項1: f(1): 1
+- 項2: f(2), f(1), f(2): 3
+- 項3: f(3), f(1), f(2), f(0), f(1): 5
+- 項4: f(4), f(2), f(0), f(1), f(3), f(1), f(2), f(0), f(1): 9
+- 項5: f(5), f(3), f(1), f(2), f(0), f(1), f(4), f(2), f(0), f(1), f(3), f(1), f(2), f(0), f(1): 15
+- 項6: 25
+- 項7: 41
+- 項8: 67
+- 項9: 109
+- 項10: 177
+- 項11: 287
+- 項12: 465
+- 項13: 753
+
+次の方針でフィボナッチ数列の計算を高速化します。
+
+- フィボナッチ数を計算したら、項とフィボナッチ数を辞書に格納
+- フィボナッチ数を計算するとき、辞書に計算する項が存在したらその値を返す
+
+```python
+# ./improved_fibonacci.py
+import sys
+import time
+
+# 項とフィボナッチ数を格納する辞書
+d: dict[int, int] = {}
+
+
+def fibonacci(n):
+    global d
+    # 辞書に項が格納されていれば、その値を返す
+    if n in d:
+        return d[n]
+
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    value = fibonacci(n - 2) + fibonacci(n - 1)
+    d[n] = value
+    return value
+
+
+if __name__ == "__main__":
+    args = sys.argv
+    if len(args) != 2:
+        print("expected one argument", file=sys.stderr)
+        sys.exit(1)
+    try:
+        n = int(args[1])
+    except ValueError:
+        print("expected an integer number", file=sys.stderr)
+        sys.exit(1)
+
+    # フィボナッチ数を求める
+    started = time.time()
+    value = fibonacci(n)
+    finished = time.time()
+    elapsed = finished - started
+    print(f"fibonacci value: {value} ({elapsed:.2f} seconds)")
+```
+
+| 言語           | 実行時間(secs) |
+| -------------- | -------------: |
+| Python         |          11.68 |
+| Rust           |           0.33 |
+| Python(改善版) |           0.00 |
+
+単純にフィボナッチ数列を計算するRustのプログラムより、処理時間が短くなりました。
+
+Pythonは、`functools`パッケージに、関数の結果をキャッシュする**デコレーター**を提供するいくつかの**デコレーター**があります。
+
+デコレーターは、デコレーターで修飾した関数の処理の前後に、処理を追加するものです。
+
+上記コードを`@functools.cache`デコレーターで再実装します。
+
+```python
+# ./cached_fibonacci.py
+import sys
+import time
+import functools
+
+
+@functools.cache
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    return fibonacci(n - 2) + fibonacci(n - 1)
+
+
+if __name__ == "__main__":
+    args = sys.argv
+    if len(args) != 2:
+        print("expected one argument", file=sys.stderr)
+        sys.exit(1)
+    try:
+        n = int(args[1])
+    except ValueError:
+        print("expected an integer number", file=sys.stderr)
+        sys.exit(1)
+
+    # フィボナッチ数を求める
+    started = time.time()
+    value = fibonacci(n)
+    finished = time.time()
+    elapsed = finished - started
+    print(f"fibonacci value: {value} ({elapsed:.2f} seconds)")
+```
+
+| 言語                 | 実行時間(secs) |
+| -------------------- | -------------: |
+| Python               |          11.68 |
+| Rust                 |           0.33 |
+| Python(改善版)       |           0.00 |
+| Python(デコレーター) |           0.00 |
+
+デコレーターを独自に実装することができます。
+
+プロジェクトディレクトリに`decorators.py`ファイルを作成して、次のコードを入力／実行してください。
+
+`foo`関数の呼び出しが、`print_deco`で修飾され、関数を実行する前に`--- start ---`、関数を実行した後に`--- end ---`が表示されます。
+
+```python
+from typing import Callable
+
+
+# デコレーター
+def print_deco(func) -> Callable[[int, int], int]:
+    # print_deco関数が返す関数
+    def wrapper(n: int, m: int) -> int:
+        # 追加の前処理
+        print("--- start ---")
+
+        result = func(n, m)
+
+        # 追加の後処理
+        print("--- end ---")
+        return result
+
+    # 関数を返す
+    return wrapper
+
+
+# デコレーターで修飾
+@print_deco
+def foo(n: int, m: int) -> int:
+    value = n + m
+    print(f"foo will return {value}")
+    return value
+
+# 単純な`foo`関数の呼び出しが、デコレーターにより加工された関数呼び出しになっている
+value = foo(10, 12)
+assert value == 22
+```
+
+デコレーターは、関数を受け取り、内部で受け取った関数を呼び出す関数を返します。
+日本語での説明が難しいですが、興味のある方は[Pythonのデコレータを理解するための12Step](https://qiita.com/_rdtr/items/d3bc1a8d4b7eb375c368)を参照してください。
+Pythonをより深く理解できるようになります。

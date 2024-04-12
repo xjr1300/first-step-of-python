@@ -47,6 +47,7 @@
     * set内表表記
     * 辞書内表表記
     * 条件付き内包表記
+  * デコレーター
 * 外部パッケージの利用
   * pandas、numpy
   * matplotlib(またはseaborne)
