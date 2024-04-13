@@ -1419,6 +1419,9 @@ if __name__ == "__main__":
 イテレーターは、スペシャルメソッド`__next__`メソッドを実装しており、次の要素を返すことができます。
 もし、次の要素がない場合、`StopIteration`例外を発生させます。
 
+`for`文でイテレーターを使用すると、`StopIteration`例外が発生するまで、要素を順に取り出して処理します。
+このとき、`for`文は`StopIteration`例外を適切に例外処理するため、プログラムがクラッシュすることはありません。
+
 ```python
 # ./iterator.py
 from typing import Self
