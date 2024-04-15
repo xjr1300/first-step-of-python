@@ -319,24 +319,26 @@ Python拡張機能をインストールすると`Pylance`と`Python Debugger`も
 
 Pythonでコードを記述する場合、次のようなコーディングスタイルがあり[PEP8](https://peps.python.org/pep-0008/)として公開されています。
 
-- 文字エンコーディングはUTF-8
 - インデントはスペース4つ
+- 文字エンコーディングはUTF-8
 
-また、改行コードの標準は、Windowsでは`CRLF`、LinuxやMacでは`LF`です。
-PEP8に定められてはいませんが、`LF`が望ましいのではないかと考えています。
+なお、改行コードは、Windowsにおいて`CRLF(0x0D0A)`、LinuxやMacでは`LF(0x0A)`が標準です。
+`PEP8`に定められてはいませんが、本文書では改行コードを`LF`に統一します。
 
 > 共同開発する場合は、コーディングスタイルを統一することが重要です。
 
-上記コーディングスタイルを苦痛なく遵守するために、VSCodeの設定を次の通り変更します。
+上記コーディングスタイルを自然に遵守できるように、VSCodeを次のとおり設定します。
 
 1. VSCodeで`Ctrl + Shift + P`を押して、コマンドパレットを表示します。
 2. コマンドパレットに`open user settings`と入力していくと、コマンドの候補がリストされるため`Preferences: Open User Settings`をマウスで選択します。
-3. テキスト入力欄に`editor: tab size`と入力して、表示された`Editor: Tab Size`の値を`4`に変更します。
+3. `Settings`タブの上部にあるテキスト入力欄に`editor: tab size`と入力して、表示された`Editor: Tab Size`の値を`4`に変更します。
 4. 同様に`editor: insert spaces`と入力して、表示された`Editor: Insert Spaces`をチェックします。
-5. 次に`files: eol`と入力して、表示された`Files: Eol`に`\n`を入力します。
-6. 最後に`files: encoding`と入力して、表示された`Files: Encoding`に`UTF-8`を入力します。
+5. 次に`files: encoding`と入力して、表示された`Files: Encoding`に`UTF-8`を入力します。
+6. 最後に`files: eol`と入力して、表示された`Files: Eol`に`\n`を入力します。
 
-`eol`は`end of line(s)`の略です。
+`Editor: Insert Spaces`をチェックすると、`Tab`キーを押したときにスペースが挿入されます。
+挿入されるスペースの数は、`Editor: Tab Size`で設定した値になります。
+また、`eol`は`end of line(s)`の略です。
 
 VSCodeの設定は即座に反映されるため、`OK`ボタンをクリックするなどのアクションは必要ありません。
 
