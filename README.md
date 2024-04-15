@@ -246,6 +246,11 @@ Pythonが正常にダウンロードされているか確認するために、�
 set PATH=%PATH%;C:\Users\d12272\AppData\Local\Programs\Python\Python312\Scripts\
 ```
 
+> 環境変数`PATH`は`OS`が使用する重要な設定の1つです。
+> `PATH`は、`OS`がプログラムやコマンドを実行する際に、そのプログラムがどこにあるかを示すリストです。
+> このリストには、ディレクトリ（フォルダー）のパスが含まれており、`OS`がそのリストからもt句的のファイルをなどを見つけることができます。
+> `PATH`に設定されている値を表示するには、コマンドプロンプトで`echo %PATH%`を実行してください。
+
 ## Visual Studio Code(VSCode)のインストール
 
 この文書では、Pythonコードの記述を`Visual Studio Code`（以下、VSCode）で行います。
@@ -364,7 +369,7 @@ VSCodeの設定は即座に反映されるため、`OK`ボタンをクリック�
 
 ## インタープリタの使用
 
-インタープリタを使用するためには、ターミナルを起動する必要があります(もしかすると、すでに起動しているかもしれません)。
+Pythonのインタープリタは、ターミナルから使用します(すでにターミナルが起動しているかもしれません)。
 VSCodeの[Terminal]メニューから[New Terminal]を選択すると、VSCodeの下部にターミナルが表示されます(`Ctrl + Shift + @`)。
 
 - PowerShellの場合
@@ -375,8 +380,8 @@ VSCodeの[Terminal]メニューから[New Terminal]を選択すると、VSCode�
 
 ![DOS](./images/dos.png)
 
-ターミナルに`python`と入力して`Enter`キーを押します。
-Pythonのインタープリタが起動し、`>>>`(プロンプト)が表示されれば、Pythonのインタープリタを使用できます。
+ターミナルに`python`と入力して`Enter`キーを押して、インタープリタを起動ます。
+`>>>`(プロンプト)が表示されれば、インタープリタが起動しています。
 
 - PowerShellの場合
 
@@ -396,7 +401,8 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-インタープリタに次を1行ずつ入力して、`Enter`キーを押して、どのように機能するか確認してください。
+インタープリタに次を1行ずつ入力して、`Enter`キーを押してください。
+入力した結果、インタープリタがどのように応答するか確認してください。
 
 ```python
 print("Hello, Python!")
@@ -416,6 +422,9 @@ type(43)
 type("43")
 a = 43
 print(f"a = {a}")
+for n in range(10):
+    print(n)
+
 import math
 pi = math.pi
 pi
@@ -426,17 +435,19 @@ def fibonacci(n):
         return 0
     elif n == 1:
         return 1
-    else:
-        return fibonacci(n - 1) + fibonacci(n - 2)
+    return fibonacci(n - 1) + fibonacci(n - 2)
 
 fibonacci(10)
 exit()
 ```
 
-`def fibonacci(n):`と入力して`Enter`キーを押すと、次の行が`...`に変わります。
+`for n in range(10):`の行を入力した後、`Enter`キーを押すと、次の行が`...`に変わります。
+`for`文が実行するブロックを表現する必要があるため、`Tab`キーを押した後`print(n)`と入力して`Enter`キーを2回押します。
+
+同様に、`def fibonacci(n):`と入力して`Enter`キーを押すと、次の行が`...`に変わります。
 関数のブロックを表現する必要があるため、`Tab`キーを押した後`if n == 0:`と入力して`Enter`キーを押します。
 それぞれの`return`文を入力する前に`Taq`キーを2回押す必要があります。
-`fibonacci`関数の最後の`return`文の後は、`Enter`キーを2回押すと`...`が消えて、次の行が`>>>`に変わります。
+`fibonacci`関数の最後の`return`文の後は、`Enter`キーを2回押すと`...`が消えて、`fibonacci`関数が定義され、次の行が`>>>`に変わります。
 
 > `...`が表示されている場合、ブロック内のコードを入力する必要があることを示しています。
 
