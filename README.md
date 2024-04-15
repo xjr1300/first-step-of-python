@@ -918,8 +918,9 @@ Python Tutor: Visualize code in Python, JavaScript, C, C++, and Java: <https://p
 
 ### 関数
 
-関数は、ある処理を実行するための一連の手順をまとめて、名前を付けたものです。
-Pythonは、標準で膨大な数の便利な関数を提供しています。
+関数は、ある処理を実行するための一連の手続きをまとめて、名前を付けたものです。
+Pythonは、標準で膨大な便利な関数を提供しています。
+
 また、プログラムが複雑になってくると、大きな処理の流れを記述する部分と、細かな処理をする部分を関数に分割することで、プログラムの見通しが良くなります。
 
 プロジェクトディレクトリに、`functions1.py`ファイルを作成して、次のコードを入力してください。
@@ -947,11 +948,17 @@ if __name__ == "__main__":
     main()
 ```
 
-そして、ターミナルに次を入力して、`functions.py`ファイルを実行してください。
+そして、ターミナルに次を入力して、`functions1.py`ファイルを実行してください。
 
 ```ps
-python functions.py
+python functions1.py
 ```
+
+> `if __name__ == "__main__":`について
+>
+> `python foo.py`のようにPythonのファイルを実行したとき、Pythonは自動的に`__name__`変数に`__main__`という値を設定します。
+> これを利用して、Pythonファイルをライブラリとしてインポートして、上記で言えば`foo`、`bar`、`baz`関数のみインポートして、
+> `if __name__ == "__main__":`ブロックのコードが実行されないようにします。
 
 関数は値を受け取り、値を返すことができます。
 関数に渡す値を**引数**、関数から返ってくる値を**戻り値**と呼びます。
@@ -1023,6 +1030,8 @@ if __name__ == "__main__":
 
 ![引数の値渡し](./images/call-by-value.png)
 
+次の動画を確認して、引数の値渡しのイメージを掴んでください。
+
 引数の値渡し動画:
 <https://dainichiconsul.box.com/s/i7in8bfzrmhga45a9fu9moy8l7i3matr>
 
@@ -1043,6 +1052,8 @@ if __name__ == "__main__":
 ```
 
 ![引数の参照渡し](./images/call-by-reference.png)
+
+次の動画を確認して、引数の参照渡しのイメージを掴んでください。
 
 引数の参照渡し動画:
 <https://dainichiconsul.box.com/s/2naryjv29n9zmedqwfwn75jehkqza8fq>
