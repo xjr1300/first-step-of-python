@@ -291,25 +291,27 @@ VSCodeのインストール完了画面が表示された後、同じ画面の`�
 
 ## Python拡張機能のインストール
 
-VSCodeの画面の左にある`Extensions`をクリックして次の拡張機能をインストールします。
+VSCodeで快適にPythonコードを記述するために、VSCodeの画面の左にある`Extensions`をクリックして次の拡張機能をインストールします。
 
 - `Python`: Microsoft社
 - `Japanese Language Pack for Visual Studio Code`: Microsoft社
 - `indent-rainbow`: oderwat社
 
 上記拡張機能は、`Extensions`の上部にある`Search Extensions in Marketplace`に`python`や`japanese`を入力することで検索できます。
-それぞれの拡張機能が見つけた後、その拡張機能の右下にある小さな`Install`をクリックすることで拡張機能をインストールできます。
+それぞれの拡張機能が見つけた後、その拡張機能の右下にある小さな`Install`をクリックしてそれぞれの拡張機能をインストールしてください。
+
+> 警告: 似たような名前の拡張機能があるため、`Install`をクリックする拡張機能を十分に確認してください。
 
 ![Python拡張機能のインストール](./images/python-extension.png)
 
 ![Japanese Language Packのインストール](./images/japanese-language-extension.png)
 
 Python拡張機能をインストールすると`Pylance`と`Python Debugger`も同時にインストールされます。
-これらの拡張機能が、Pythonコードを自動で補間や整形したり、デバッグを支援するなど、開発者の実装体験(エクスペリエンス)を向上します。
+これらの拡張機能が、Pythonコードを自動で補間や整形したり、デバッグを支援するなど、開発者の実装体験を向上させます。
 
-Pythonコードは、条件判断した結果によって実行するコードの範囲や、繰り返し処理するコードの範囲をインデント(字下げ)で表現します。
-`indent-rainbow`拡張機能は、Pythonコードのインデントを視覚的にわかりやすく表示するための拡張機能です。
-また、上記で説明したインデントした範囲を**ブロック**と呼びます。
+また、Pythonコードは、条件判断した結果によって実行するコードの範囲や、繰り返し処理するコードの範囲をインデント(字下げ)で表現します。
+`indent-rainbow`拡張機能は、Pythonコードのインデントを視覚的にわかりやすく表示する拡張機能です。
+なお、上記で説明したインデントした範囲を**ブロック**と呼びます。
 
 ![indent-rainbowの効果](./images/effect-of-indent-rainbow.png)
 
