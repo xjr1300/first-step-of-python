@@ -455,10 +455,13 @@ exit()
 
 ## チュートリアル用のプロジェクトの作成
 
-1. エクスプローラーを開き、例えば`C:\Users\<user-identifier>\Documents`ディレクトリ(フォルダ、`PC > ドキュメント`と表示されています)に`py_tutorial`ディレクトリを作成します。
+1. エクスプローラーを開き、例えば`C:\Users\<user-identifier>\Documents`ディレクトリ(フォルダ、エクスプローラーでは`PC > ドキュメント`と表示されます)に`py_tutorial`ディレクトリを作成します。
 2. 作成した`py_tutorial`ディレクトリを右クリックして、表示されたコンテキストメニューから`Codeで開く`を選択すると、`py_tutorial`をカレントディレクトリとして開いた状態でVSCodeが起動します。
 
-`Do you trust the authors of the files in this folder?`と表示された場合、**全面的に信用**するため、`Truest the authors of all file in the parent folder 'Documents'`をチェックして、`Yes, I trust the authors`ボタンをクリックしてください。
+`Do you trust the authors of the files in this folder?`と表示された場合、**とりあえず信用する**ため、`Truest the authors of all file in the parent folder 'Documents'`をチェックして、`Yes, I trust the authors`ボタンをクリックしてください。
+
+> これは、[CVE-2020-1416](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1416)に対するセキュリティ対策です。
+> VSCode(とVisual Studio)は、ソフトウェアの依存関係を読み込むときに権限が昇格する脆弱性があり、悪意のあるプログラムが特権を取得することで、被害を受ける可能性があります。
 
 以降`py_tutorial`ディレクトリを**プロジェクトディレクトリ**と呼びます。
 また、ファイルやディレクトリのパスは、カレントディレクトリからの相対パスで表現します。
@@ -477,7 +480,7 @@ py_tutorial
 
 `cart`のパスは、`cart`または`.\cart`と表現します。
 `LC_MESSAGES`のパスは、`locale\es\LC_MESSAGES`または`.\locale\es\LC_MESSAGES`と表現します。
-最初の`.`は現在のディレクトリを示しており、つまり`py_tutorial`ディレクトリです。
+パスの最初の文字の`.`は現在のディレクトリを示しており、つまり`py_tutorial`ディレクトリです。
 ただし、`cart`ディレクトリを`py_tutorial\cart`と表現できません。これは存在しない`py_tutorial\py_tutorial\cart`を示します。
 
 ## 仮想環境の作成
