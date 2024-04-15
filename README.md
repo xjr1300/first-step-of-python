@@ -241,13 +241,13 @@ Pythonが正常にダウンロードされているか確認するために、�
 - PowerShellの場合
 
 ```ps
- $ENV:Path+=";C:\Users\d12272\AppData\Local\Programs\Python\Python312\Scripts\"
+ $ENV:Path+=";C:\Users\<user-name>\AppData\Local\Programs\Python\Python312\Scripts\"
 ```
 
 - MS-DOSの場合
 
 ```dos
-set PATH=%PATH%;C:\Users\d12272\AppData\Local\Programs\Python\Python312\Scripts\
+set PATH=%PATH%;C:\Users\<user-name>\AppData\Local\Programs\Python\Python312\Scripts\
 ```
 
 > 環境変数`PATH`は`OS`が使用する重要な設定の1つです。
