@@ -906,9 +906,12 @@ Pythonの言語仕様として`None`があり、`None`を使用しないで開�
 
 Pythonにおける変数とは、データをメモリに格納するときに、そのデータの位置（メモリアドレス）を示すラベルのようなものです。
 
-<https://pythontutor.com/render.html#mode=edit>
+Python Tutor: Visualize code in Python, JavaScript, C, C++, and Java: <https://pythontutor.com/render.html#mode=edit>
 
 ![変数の可視化](./images/variable-visualization.png)
+
+次の動画を参照して、変数がメモリに割り当てられる様子を確認してください。
+ただし、実際のメモリの割り当て状況を示しているわけではないため、概念として理解してください。
 
 変数の可視化動画:
 <https://dainichiconsul.box.com/s/kgq034fe2orsvoygvp4qb14x9exsqmjh>
