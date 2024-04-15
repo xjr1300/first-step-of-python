@@ -913,7 +913,7 @@ Python Tutor: Visualize code in Python, JavaScript, C, C++, and Java: <https://p
 
 ![変数の可視化](./images/variable-visualization.png)
 
-次の動画を参照して、変数がメモリに割り当てられる様子を確認してください。
+次の動画をダウンロード／再生して、変数がメモリに割り当てられる様子を確認してください。
 ただし、実際のメモリの割り当て状況を示しているわけではないため、概念として理解してください。
 
 変数の可視化動画:
@@ -1056,7 +1056,7 @@ if __name__ == "__main__":
 
 ![引数の値渡し](./images/call-by-value.png)
 
-次の動画を確認して、引数の値渡しのイメージを掴んでください。
+次の動画をダウンロード／再生して、引数が値渡しされる様子を確認してください。
 
 引数の値渡し動画:
 <https://dainichiconsul.box.com/s/i7in8bfzrmhga45a9fu9moy8l7i3matr>
@@ -1079,7 +1079,7 @@ if __name__ == "__main__":
 
 ![引数の参照渡し](./images/call-by-reference.png)
 
-次の動画を確認して、引数の参照渡しのイメージを掴んでください。
+次の動画をダウンロード／再生して、引数が参照渡しされる様子を確認してください。
 
 引数の参照渡し動画:
 <https://dainichiconsul.box.com/s/2naryjv29n9zmedqwfwn75jehkqza8fq>
@@ -1116,8 +1116,8 @@ if __name__ == "__main__":
     baz()
 ```
 
-上記コードで宣言された変数や関数のスコープが、どの範囲で有効になっているかを、次の動画で確認してください。
-変数や関数がスコープから外れると、削除されることを確認してください。
+次の動画をダウンロード／再生して、上記コードで宣言された変数や関数のスコープがどのように働いているか確認してください。
+また、変数や関数がスコープから外れると、削除されることを確認してください。
 
 変数と関数のスコープの動画:
 <https://dainichiconsul.box.com/s/9n2uw6pqdnq13chpzddvvwg3c1ui6vbd>
@@ -1639,6 +1639,8 @@ if __name__ == "__main__":
     value = factorial(10)
     print(value)
 ```
+
+次の動画をダウンロード／再生して、再帰関数が処理される様子を確認してください。
 
 再帰関数の動作:
 <https://dainichiconsul.box.com/s/q0ot0pxg31p6qm7z5l9e5g7iv7y2ckn0>
