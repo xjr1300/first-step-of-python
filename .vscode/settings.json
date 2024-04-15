@@ -8,6 +8,6 @@
     "numpy",
     "oderwat",
     "randint",
-    "Traceback"
+    "traceback"
   ]
 }
