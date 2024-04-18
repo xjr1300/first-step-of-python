@@ -1,6 +1,6 @@
-# Pythonの最初のステップ for Windows
+# Python概要 for Windows
 
-- [Pythonの最初のステップ for Windows](#pythonの最初のステップ-for-windows)
+- [Python概要 for Windows](#python概要-for-windows)
   - [Pythonの簡単な説明](#pythonの簡単な説明)
     - [Pythonの特徴](#pythonの特徴)
     - [Pythonの欠点](#pythonの欠点)
