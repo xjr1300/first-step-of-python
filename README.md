@@ -644,10 +644,10 @@ Pythonで扱えるデータ型の一部を次に示します。
 1.5
 ```
 
-したがって、**絶対にfloat型でお金を扱わない**ようにしてください。
-お金を扱う場合は、次に説明する`decimal.Decimal`型を使用してください。
+floatは誤差があるため、**絶対にお金を扱わない**ようにしてください。
+お金を扱う場合は、次で説明する`decimal.Decimal`型を使用してください。
 
-また、有理数を扱う`fractions.Fraction`型もあります。
+また、計算途中の誤差をなくす場合は、有理数を扱う`fractions.Fraction`型を利用してください。
 
 ```python
 >>> from fractions import Fraction
