@@ -597,6 +597,9 @@ Pythonで扱えるデータ型の一部を次に示します。
 >>> "Hello, " + "Python!"
 'Hello, Python!'
 >>>
+>>> for ch in "hello":
+>>>     print(ch)
+>>>
 >>> "foo, bar, baz, qux, quux".split(",")
 ['foo', ' bar', ' baz', ' qux', ' quux']
 ```
