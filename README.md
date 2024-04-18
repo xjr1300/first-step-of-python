@@ -651,11 +651,11 @@ floatは誤差があるため、**絶対にお金を扱わない**ようにし�
 
 ```python
 >>> from fractions import Fraction
->>> f = Fraction(1/10) + Fraction(1/10) + Fraction(1/10)
+>>> f = Fraction(1, 10) + Fraction(1, 10) + Fraction(1, 10)
 >>> f
-Fraction(10808639105689191, 36028797018963968)
+Fraction(3, 10)
 >>> float(f)
-0.30000000000000004
+0.3
 ```
 
 #### Decimal型（固定小数点数）
