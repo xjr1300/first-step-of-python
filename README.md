@@ -9,6 +9,7 @@
       - [明示的に型を示さない](#明示的に型を示さない)
   - [Pythonのインストール](#pythonのインストール)
   - [Visual Studio Code(VSCode)のインストール](#visual-studio-codevscodeのインストール)
+  - [VSCodeセキュリティポリシーのの変更](#vscodeセキュリティポリシーのの変更)
   - [Python拡張機能のインストール](#python拡張機能のインストール)
   - [VSCodeのエディタ設定](#vscodeのエディタ設定)
   - [インタープリタの使用](#インタープリタの使用)
@@ -317,6 +318,27 @@ VSCodeのインストール完了画面が表示された後、同じ画面の`�
 また、エクスプローラーでファイルまたはディレクトリをマウスで右クリックして表示されるコンテキストメニューに`Codeで開く`メニューがあること、そのメニューをクリックしたときVSCodeが起動することを確認してください。
 
 ![エクスプローラからVSCodeを起動](./images/run-vscode-from-explorer.png)
+
+## VSCodeセキュリティポリシーのの変更
+
+VSCodeのセキュリティポリシーを変更して、後で説明する仮想環境を有効にできるようにします。
+
+- `Ctrl + Shift + P`を押して、コマンドパレットを表示します。
+- `open user settings`と入力して、表示された`Preferences: Open User Settings (JSON)`を選択します。
+- VSCodeの画面に表示された`settings.json`に編集して次に表示される状態にします。
+
+```json
+{
+  "terminal.integrated.env.windows": {
+    "PSExecutionPolicyPreference": "RemoteSigned"
+  }
+}
+```
+
+- `Ctrl + S`を押して、`settings.json`を保存します。
+- VSCodeで開いている`settings.json`を閉じます。
+
+![ユーザー設定ファイルの表示](./images/open-user-settings-json.png)
 
 ## Python拡張機能のインストール
 
