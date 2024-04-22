@@ -6,7 +6,6 @@
     - [Pythonの特徴](#pythonの特徴)
     - [Pythonの欠点](#pythonの欠点)
       - [プログラムの実行速度が遅い](#プログラムの実行速度が遅い)
-      - [明示的に型を示さない](#明示的に型を示さない)
   - [Pythonのインストール](#pythonのインストール)
   - [Visual Studio Code(VSCode)のインストール](#visual-studio-codevscodeのインストール)
   - [VSCodeセキュリティポリシーのの変更](#vscodeセキュリティポリシーのの変更)
@@ -18,17 +17,15 @@
   - [VSCodeで仮想環境を選択](#vscodeで仮想環境を選択)
   - [言語機能の説明](#言語機能の説明)
     - [コメント](#コメント)
-    - [データ型](#データ型)
+    - [プリミティブ（基本的）なデータ型](#プリミティブ基本的なデータ型)
       - [str型（文字列）](#str型文字列)
       - [int型（整数）](#int型整数)
       - [float型（32bit浮動小数点数）](#float型32bit浮動小数点数)
-      - [Decimal型（固定小数点数）](#decimal型固定小数点数)
       - [bool型（真偽値）](#bool型真偽値)
-      - [list型（リスト）](#list型リスト)
-      - [tuple型（タプル）](#tuple型タプル)
-      - [dict型（辞書）](#dict型辞書)
-      - [set型（集合）](#set型集合)
       - [None（のん）](#noneのん)
+    - [コレクション型](#コレクション型)
+      - [list型（リスト）](#list型リスト)
+      - [dict型（辞書）](#dict型辞書)
     - [変数](#変数)
     - [論理式](#論理式)
       - [偽（False）と判定されるもの](#偽falseと判定されるもの)
@@ -36,23 +33,11 @@
       - [引数の詳細](#引数の詳細)
         - [位置引数](#位置引数)
         - [名前付き引数](#名前付き引数)
-        - [可変長位置引数](#可変長位置引数)
-      - [可変長キーワード引数](#可変長キーワード引数)
-      - [可変長位置／キーワード引数を受け取る関数の節度ある定義](#可変長位置キーワード引数を受け取る関数の節度ある定義)
     - [スコープ](#スコープ)
-    - [イミュータブルとミュータブルなデータ型](#イミュータブルとミュータブルなデータ型)
     - [プログラムの制御構造](#プログラムの制御構造)
       - [順次](#順次)
       - [分岐](#分岐)
-        - [三項演算子（みたいな制御構造）](#三項演算子みたいな制御構造)
       - [繰り返し](#繰り返し)
-      - [例外処理](#例外処理)
-      - [再帰](#再帰)
-      - [yield（いーるど）](#yieldいーるど)
-      - [コンテキストマネージャ](#コンテキストマネージャ)
-      - [非同期処理](#非同期処理)
-    - [内包表記](#内包表記)
-    - [デコレーター](#デコレーター)
   - [外部パッケージの利用](#外部パッケージの利用)
   - [最後に](#最後に)
 
@@ -86,12 +71,10 @@
 ### Pythonの特徴
 
 - オープンソース
-- コードの記述がシンプルなインタープリタ言語
-  - プログラムの実行時にソースコードを機械語に変換する方式
-  - コンパイル言語とは異なり、コンパイルの必要がなく、手軽に実行ができる
+- コードの記述方法がシンプル
+- プログラムの実行時にコードを機械語に変換するインタープリタ言語であるため手軽に実行できる
 - Python公式から提供される標準ライブラリが豊富
 - 標準ライブラリ以外にも、コミュニティによる多種多様なライブラリ（パッケージ）の開発が活発
-  - パッケージの種類は、機械学習、数値計算、画像処理、Web、データベースなど多い
 - 世界中で人気のあるプログラミング言語の1つで、人気は`JavaScript`に次いで2位(2024年)
 
 ### Pythonの欠点
@@ -123,9 +106,7 @@ PythonとRustで項45のフィボナッチ数は、`1,134,903,170`で、計算�
 | Python |        129.849 | Rustよりも40倍以上遅い |
 | Rust   |          3.644 | -                      |
 
-実行速度が遅いにも関わらず、機械学習や画像処理に利用される理由は、**コストの高い処理を`C`言語で記述されたプログラム（ライブラリ）に移譲**して、結果を受け取っているからです。
-
-ただし、Pythonには、**実行速度に遅さを補うほど、手軽に利用できる大きな利点があります**。
+ただし、**Pythonには、実行速度に遅さを補うほど、手軽に利用できる大きな利点があります**。
 
 実験で試したコードは次の通りです。
 
@@ -198,32 +179,6 @@ fn fibonacci(n: u32) -> u32 {
     }
 }
 ```
-
-#### 明示的に型を示さない
-
-Pythonのコードでは、次の関数の引数`n`にどのようなデータを渡せば良いか、関数の実装を確認しないと把握できません。
-
-```python
-# pythonで実装したフィボナッチ数の例
-# pythonでは、関数の引数と戻り値の型を明示しなくても良い。
-def fibonacci(n):
-    pass
-
-# pythonはタイプヒントにより、次のように関数を定義できる。
-# インタープリタはタイプヒントを無視する。
-# def fibonacci(n: int) -> int:
-#     pass
-```
-
-一方、Rustは関数の引数と戻り値の型を明示しなければなりません。
-
-前掲のRustのコードに型を明示していない箇所が多くありますが、型はコンパイラが推論しています。
-Rustの言語サーバーが動作しているVSCodeでは、コンパイラが推論した型を表示する機能があります。
-
-![VSCodeで表示したRustのコード](./images/rust-fibonacci.png)
-
-また、Pythonの型は実行時に決定されるため、**動的型付き言語**に分類されます。
-一方、Rustの型はコンパイル時に決定されるため、**静的型付き言語**に分類されます。
 
 ## Pythonのインストール
 
@@ -373,9 +328,6 @@ Pythonでコードを記述する場合、次のようなコーディングス�
 - インデントはスペース4つ
 - 文字エンコーディングはUTF-8
 
-なお、改行コードは、Windowsにおいて`CRLF(0x0D0A)`、LinuxやMacでは`LF(0x0A)`が標準です。
-`PEP8`に定められてはいませんが、本チュートリアルでは改行コードを`LF`に統一します。
-
 > 共同開発する場合は、コーディングスタイルを統一することが重要です。
 
 上記コーディングスタイルを自然に遵守できるように、VSCodeを次のとおり設定します。
@@ -384,12 +336,10 @@ Pythonでコードを記述する場合、次のようなコーディングス�
 2. コマンドパレットに`open user settings`と入力していくと、コマンドの候補がリストされるため`Preferences: Open User Settings`をマウスで選択します。
 3. `Settings`タブの上部にあるテキスト入力欄に`editor: tab size`と入力して、表示された`Editor: Tab Size`の値を`4`に変更します。
 4. 同様に`editor: insert spaces`と入力して、表示された`Editor: Insert Spaces`をチェックします。
-5. 次に`files: encoding`と入力して、表示された`Files: Encoding`に`UTF-8`を入力します。
-6. 最後に`files: eol`と入力して、表示された`Files: Eol`に`\n`を入力します。
+5. 最後に`files: encoding`と入力して、表示された`Files: Encoding`に`UTF-8`を入力します。
 
 `Editor: Insert Spaces`をチェックすると、`Tab`キーを押したときにスペースが挿入されます。
 挿入されるスペースの数は、`Editor: Tab Size`で設定した値になります。
-また、`eol`は`end of line(s)`の略です。
 
 VSCodeの設定は即座に反映されるため、`OK`ボタンをクリックするなどのアクションは必要ありません。
 
@@ -405,10 +355,6 @@ VSCodeの設定は即座に反映されるため、`OK`ボタンをクリック�
 
 ![スペース挿入](./images/insert-spaces.png)
 
-- `Files: Eol`
-
-![改行コード](./images/eol.png)
-
 - `Files: Encoding`
 
 ![文字エンコーディング](./images/character-encoding.png)
@@ -418,30 +364,13 @@ VSCodeの設定は即座に反映されるため、`OK`ボタンをクリック�
 Pythonのインタープリタは、ターミナルから使用します(すでにターミナルが起動しているかもしれません)。
 VSCodeの[Terminal]メニューから[New Terminal]を選択すると、VSCodeの下部にターミナルが表示されます(`Ctrl + Shift + @`)。
 
-- PowerShellの場合
-
 ![PowerShell](./images/power-shell.png)
-
-- コマンドプロンプト(MS-DOS)の場合
-
-![DOS](./images/dos.png)
 
 ターミナルに`python`と入力して`Enter`キーを押して、インタープリタを起動ます。
 `>>>`(プロンプト)が表示されれば、インタープリタが起動しています。
 
-- PowerShellの場合
-
 ```ps
 PS C:\Users\xxx> python
-Python 3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)] on win32
-Type "help", "copyright", "credits" or "license" for more information.
->>>
-```
-
-- MS-DOSの場合
-
-```dos
-C:\Users\xxx> python
 Python 3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
@@ -453,21 +382,12 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```python
 print("Hello, Python!")
 1 + 2
+1 - 2
 3 * 6
-12 / 4
-type(12 / 4)
-12 // 4
-type(12 // 4)
 13 / 4
 13 // 4
 13 % 4
-4**2
-10 + 10.5
 "hello, " + "world!"
-type(43)
-type("43")
-a = 43
-print(f"a = {a}")
 for n in range(10):
     print(n)
 
@@ -476,14 +396,6 @@ pi = math.pi
 pi
 math.sin(pi)
 math.sin(math.pi)
-def fibonacci(n):
-    if n == 0:
-        return 0
-    elif n == 1:
-        return 1
-    return fibonacci(n - 1) + fibonacci(n - 2)
-
-fibonacci(10)
 exit()
 ```
 
@@ -491,11 +403,6 @@ exit()
 
 `for n in range(10):`の行を入力した後、`Enter`キーを押すと、次の行が`...`に変わります。
 `for`文が実行するブロックを表現する必要があるため、`Tab`キーを押した後`print(n)`と入力して`Enter`キーを2回押します。
-
-同様に、`def fibonacci(n):`と入力して`Enter`キーを押すと、次の行が`...`に変わります。
-関数のブロックを表現する必要があるため、`Tab`キーを押した後`if n == 0:`と入力して`Enter`キーを押します。
-それぞれの`return`文を入力する前に`Taq`キーを2回押す必要があります。
-`fibonacci`関数の最後の`return`文の後は、`Enter`キーを2回押すと`...`が消えて、`fibonacci`関数が定義され、次の行が`>>>`に変わります。
 
 > `...`が表示されている場合、ブロック内のコードを入力する必要があることを示しています。
 
@@ -557,18 +464,9 @@ py_tutorial
 
 コマンドの実行後、ターミナルのプロンプトに`(.venv)`が表示されていれば、仮想環境が有効になっています。
 
-- PowerShellの場合
-
 ```ps
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-```
-
-- MS-DOSの場合
-
-```dos
-python -m venv .venv
-.\.venv\Scripts\activate.bat
 ```
 
 ## VSCodeで仮想環境を選択
@@ -618,23 +516,15 @@ print("Hello, Python!")  # `#`から右はコメントです。
 
 ![comments.pyの実行](./images/run-comments.png)
 
-### データ型
+### プリミティブ（基本的）なデータ型
 
-Pythonで扱えるデータ型の一部を次に示します。
+Pythonで扱えるプリミティブなデータ型の一部を次に示します。
 
 - `str`: 文字列
 - `int`: 整数
 - `float`: 浮動小数点数
-- `Decimal`: 固定小数点数
 - `bool`: 真偽値
-- `list`: リスト
-- `tuple`: タプル
-- `dict`: 辞書
-- `set`: 集合
 - `None`
-
-`str`、`int`、`float`、`Decimal`、`bool`、`None`は、1つの値を表現します。
-`list`、`tuple`、`dict`、`set`は、複数の値を内部に保持するコレクションを表現します。
 
 #### str型（文字列）
 
@@ -700,9 +590,8 @@ Pythonで扱えるデータ型の一部を次に示します。
 ```
 
 floatは誤差があるため、**絶対にお金を扱わない**ようにしてください。
-お金を扱う場合は、次で説明する`decimal.Decimal`型を使用してください。
-
-また、計算途中の誤差をなくす場合は、有理数を扱う`fractions.Fraction`型を利用してください。
+お金を扱う場合は、`decimal.Decimal`型を使用してください。
+また、計算途中の誤差をなくしたい場合は、有理数を扱う`fractions.Fraction`型を利用できます。
 
 ```python
 >>> from fractions import Fraction
@@ -711,25 +600,6 @@ floatは誤差があるため、**絶対にお金を扱わない**ようにし�
 Fraction(3, 10)
 >>> float(f)
 0.3
-```
-
-#### Decimal型（固定小数点数）
-
-十進数を正確に表現できる型(`decimal.Decimal`)です。
-小学校で習った算術と同じように動作します。
-
-```python
->>> from decimal import Decimal
->>> Decimal("0.1") + Decimal("0.1") + Decimal("0.1")
-Decimal('0.3')
-```
-
-`Decimal("0.1")`などと**値を文字列で与える**ことに注意してください。
-`Decimal(0.1)`とすると、浮動小数点数の誤差が発生します。
-
-```python
-Decimal(0.1)
-Decimal('0.1000000000000000055511151231257827021181583404541015625')
 ```
 
 #### bool型（真偽値）
@@ -743,12 +613,26 @@ True
 False
 ```
 
+#### None（のん）
+
+値または参照するデータがないことを示すデータ型です。
+
+`None`を扱う場合は、次に説明する**変数**に値が格納されているか、それとも`None`なのか、常に意識してプログラムを作成する必要があります。
+
+### コレクション型
+
+複数のデータをひとまとめに扱えるデータ型を**コレクション型**と呼びます。
+Pythonで扱えるコレクション型の一部を次に示します。
+
+- `list`: リスト
+- `dict`: 辞書
+
 #### list型（リスト）
 
 複数のデータを順序付けで格納する型で、プログラムで頻繁に使用されます。
-Pythonの配列(`array.array`)や他の言語の配列と異なり、異なるデータ型の要素を格納でき、また格納する要素の数を増減できます。
+listには、異なるデータ型の要素を格納でき、また格納する要素の数を増減できます。
 
-listに格納されている値を取得する場合、**インデックス**と呼ばれるlist内の要素の位置を指定して、`values[3]`のように要素を取得できます。
+listに格納されている値を取得する場合、**インデックス**と呼ばれるlist内の要素の位置を指定して、`values[3]`のように要素を取得します。
 listの最初の要素のインデックスは`0`であるため、`values[3]`は`values`リストの4番目の要素を取得しています。
 
 また、インデックスに負の値を指定することで、listの末尾からの位置を指定できます。
@@ -760,16 +644,6 @@ listの要素を取得、追加、削除する機能（メソッド）が提供�
 > つまり、要素の数が多くなるほど線形に処理時間が増加することを示します。
 
 先頭要素を頻繁に追加または削除する場合は、`collections.deque`（でっく、両端キュー）を使用します。
-
-listは次のように構築できます。
-
-```python
-[1, 2, 3, 4, 5]
->>> ["foo", "bar", "baz", "qux", "quux"]
-['foo', 'bar', 'baz', 'qux', 'quux']
->>> [1, "foo", 3.14, True, [1, 2, 3]]
-[1, 'foo', 3.14, True, [1, 2, 3]]
-```
 
 listの要素を取得、追加、変更、削除する方法を次に示します。
 
@@ -835,40 +709,6 @@ Traceback (most recent call last):
 IndexError: list index out of range
 ```
 
-listには異なる型を格納できますが、その場合、格納する要素には何らかの*目的*があると考えられます。
-その場合、listではなくdictを使用することを検討してください。
-
-#### tuple型（タプル）
-
-複数の要素を順序付けて格納する型です。
-list型と同様に異なる型を格納できますが、要素を変更できません。
-
-> listで異なる型を要素として格納することは推奨できませんが、tupleは不変であるため、どの位置に何が格納されているかは不変です。
-> よって、異なる型を格納するためにtupleを利用することは推奨できます。
-
-```python
->>> values1 = (0, 1, 2, 3, 4)
->>> values1
-(0, 1, 2, 3, 4)
->>> values2 = tuple(range(5))
->>> values2
-(0, 1, 2, 3, 4)
->>>
->>> for value in values1:
-...     print(value)
-...
-0
-1
-2
-3
-4
->>>
->>> values[5]
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-IndexError: tuple index out of range
-```
-
 #### dict型（辞書）
 
 キーと値のペアを格納するデータ型で、プログラムで頻繁に使用されます。
@@ -876,11 +716,6 @@ IndexError: tuple index out of range
 値にはどのようなデータ型も格納できます。
 dictにキーと値を追加するとき、すでに同じキーが存在する場合、そのキーに対応する値が新しい値で上書きされます。
 値を取得するときに存在しないキーを指定した場合、`KeyError`が発生します。
-
-dictからキーを使用して値を取り出す処理時間は、定数時間(`O(1)`)です。
-
-> ハッシュ化可能なデータ型は、`__hash__`メソッドが実装されています。
-> str、int、tupleは、`__hash__`メソッドが実装されているため、キーに利用できます。
 
 ```python
 >>> d = {"a": 1, "b": 3.14, "c": "hello"}
@@ -911,49 +746,6 @@ b 3.14
 c python
 ```
 
-#### set型（集合）
-
-重複して値を格納しないデータ型で、和集合、差集合、積集合などの集合演算ができます。
-listなどのコレクションから重複した値を取り除く場合に便利です。
-
-```python
->>> s1 = set()
->>> s1.add(0)
->>> s1.add(1)
->>> s1.add(2)
->>> s1
-{0, 1, 2}
->>> s2 = {0, 1, 2}
->>> s2
-{0, 1, 2}
->>> s2.add(2)
->>> s2
-{0, 1, 2}
->>>
->>> l = [0, 0, 3, 6, 7, 8, 9, 7, 5, 5]
->>> s3 = set(l)
->>> s3
-{0, 3, 5, 6, 7, 8, 9}
-```
-
-#### None（のん）
-
-値または参照するデータがないことを示すデータ型です。
-
-`None`と同様な概念である`null参照`を発明したイギリスの計算機科学者である[アントニー・ホーア](https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%88%E3%83%8B%E3%83%BC%E3%83%BB%E3%83%9B%E3%83%BC%E3%82%A2)氏は、`null参照`の発明を**10億ドルの失敗**と後悔して、謝罪もしています。
-
-> それは10億ドルにも相当する私の誤りだ。
-> null参照を発明したのは1965年のことだった。
-> 当時、私はオブジェクト指向言語(ALGOL W)における参照のための包括的型システムを設計していた。
-> 目標は、コンパイラでの自動チェックで全ての参照が完全に安全であることを保証することだった。
-> しかし、私は単にそれが容易だというだけで、無効な参照を含める誘惑に抵抗できなかった。
-> これは、後に数え切れない過ち、脆弱性、システムクラッシュを引き起こし、過去40年間で10億ドル相当の苦痛と損害を引き起こしたとみられる。
->
-> Wikipediaより<https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%88%E3%83%8B%E3%83%BC%E3%83%BB%E3%83%9B%E3%83%BC%E3%82%A2>
-
-Pythonの言語仕様として`None`があるため、`None`を使用しないで開発することはできません。
-`None`を扱う場合は、次に説明する変数に値が格納されているか、それとも`None`なのか、常に意識してプログラムを作成する必要があります。
-
 ### 変数
 
 Pythonにおける変数とは、メモリにデータを格納したときに、そのデータのメモリ上の位置（メモリアドレス）を示すラベルのようなものです。
@@ -978,15 +770,13 @@ Python Tutor: Visualize code in Python, JavaScript, C, C++, and Java: <https://p
 - `x < y`: xがyより小さい場合、`True`を返します。
 - `x >= y`: xがy以上の場合、`True`を返します。
 - `x <= y`: xがy以下の場合、`True`を返します。
-- `x is y`: xとyが同じオブジェクトである場合、`True`を返します。
-- `x is not y`: xとyが異なるオブジェクトである場合、`True`を返します。
-- `x in y`: xがyに含まれる場合、`True`を返します。
-- `x not in y`: xがyに含まれない場合、`True`を返します。
+- `x is None`: xが`None`の場合、`True`を返します。
+- `x is not None`: xが`None`でない場合、`True`を返します。
 - `not x`: xが`False`の場合、`True`を返します。
 - `x and y`: xとyが`True`の場合、`True`を返します。
 - `x or y`: xまたはyが`True`の場合、`True`を返します。
-- `x is None`: xが`None`の場合、`True`を返します。
-- `x is not None`: xが`None`でない場合、`True`を返します。
+
+Pythonでは、 intの`0`、floatの`0.0`、`None`、空の文字列、空のリスト、空のタプル、空の辞書、空の集合は、`False`として扱われます。
 
 否定を含む論理式を多用しない方が、プログラムの可読性が向上します。
 否定を多く含む論理式になった場合は、[ドモルガンの法則](https://manabitimes.jp/math/897)を使用して、否定を除去することを検討してください。
@@ -1015,8 +805,8 @@ if not l:
 関数は、ある処理を実行するための一連の手続きをまとめて、名前を付けたものです。
 Pythonは、標準で膨大な便利な関数を提供しています。
 
-関数を定義する理由は、同じ処理を繰り返し書く必要をなくすことです。
-関数を定義すれば、同じ処理を複数の場所で使い回すことができ、コードが簡潔で保守しやすくなります。
+また、関数を独自に定義することもできます。
+関数を定義する理由は、同じ処理を繰り返し書く必要をなくし、その実装を再利用することです。
 
 また、プログラムが複雑になってくると、大きな処理の流れを記述する部分と、細かな処理をする部分を関数に分割することで、プログラムの見通しが良くなります。
 
@@ -1028,7 +818,7 @@ Pythonの関数は次の通り定義します。
 > 呼び出し側で関数に渡した引数を**実引数**、関数で受け取った引数を**仮引数**と区別する場合があります。
 
 ```python
-def 関数名(引数1, 引数2, ...):
+def 関数名(引数1, 引数2, ..., 引数n):
     #
     # 引数を利用した処理
     #
@@ -1072,7 +862,7 @@ python functions1.py
 > これを利用して、Pythonファイルをライブラリとしてインポートして、上記で言えば`foo`、`bar`、`baz`関数のみインポートして、
 > `if __name__ == "__main__":`ブロックのコードが実行されないようにします。
 
-プロジェクトディレクトリに、`functions2.py`ファイルを作成して、次のコードを入力してください。
+プロジェクトディレクトリに、`functions2.py`ファイルを作成して、次のコードを入力して、実行結果を確認してください。
 
 ```python
 def add(x, y):
@@ -1088,82 +878,12 @@ def mul(x, y):
 
 if __name__ == "__main__":
     x = add(2, 3)
-    print(f"x = {x}")
+    print(x)
     y = sub(2, 3)
-    print(f"y = {y}")
-    print(f"z = {mul(2, 3)}")
+    print(y)
+    z = mul(2, 3)
+    print(z)
 ```
-
-関数の引数に渡された値は、その関数で行われた処理の影響を受ける引数の型と、影響を受けない引数の型があります。
-関数の引数は、値をコピーして関数に渡されます。
-しかし、データ型によって値そのものがコピーされるか、値が格納されている場所（メモリアドレス）がコピーされるかが異なります。
-
-値そのものがコピーされることを**値渡し**、値が格納されている場所がコピーされることを**参照渡し**と呼びます。
-
-int型、float型、str型は**値渡し**です。
-
-プロジェクトディレクトリに、`functions3.py`ファイルを作成して、次のコードを入力／実行して出力される値が**変更されていない**ことを確認してください。
-
-`+=`演算子は、現在の値に右辺の値を加算して、その結果を左辺の変数に格納します。
-`n += 10`は、`n = n + 10`と同じです。
-
-```python
-def call_by_int_value(n: int):
-    n += 10
-
-
-def call_by_float_value(f: float):
-    f += 10
-
-
-def call_by_str_value(s: str):
-    # 文字列の連結
-    s = s + "asdf"
-
-
-if __name__ == "__main__":
-    n = 1
-    call_by_int_value(1)
-    print(f"n = {n}")
-
-    f = 3.14
-    call_by_float_value(f)
-    print(f"f = {f}")
-
-    s = "1234"
-    call_by_str_value(s)
-    print(f"s = '{s}'")
-```
-
-![引数の値渡し](./images/call-by-value.png)
-
-次の動画をダウンロード／再生して、引数が値渡しされる様子を確認してください。
-
-引数の値渡し動画:
-<https://dainichiconsul.box.com/s/i7in8bfzrmhga45a9fu9moy8l7i3matr>
-
-list型、dict型、set型は**参照渡し**です。
-
-プロジェクトディレクトリに、`functions4.py`ファイルを作成して、次のコードを入力／実行して出力される値が**変更されている**ことを確認してください。
-
-```python
-def call_by_reference(l: list):
-    l.append("added")
-
-
-if __name__ == "__main__":
-    l = ["foo", "bar", "baz"]
-    call_by_reference(l)
-    print(l)
-
-```
-
-![引数の参照渡し](./images/call-by-reference.png)
-
-次の動画をダウンロード／再生して、引数が参照渡しされる様子を確認してください。
-
-引数の参照渡し動画:
-<https://dainichiconsul.box.com/s/2naryjv29n9zmedqwfwn75jehkqza8fq>
 
 #### 引数の詳細
 
@@ -1188,69 +908,6 @@ greet("Taro", "Good morning!")
 # 関数を名前付き引数を指定した呼び出し
 greet(message="Good morning!", name="Taro")
 ```
-
-##### 可変長位置引数
-
-関数の引数に`*`が付いている引数は、位置引数に続く複数の引数をタプルとして受け取る**可変長位置引数**です。
-次の例で、先頭`#`がついている行は、関数が標準出力に出力した文字列または関数呼び出しエラーを示します。
-
-```python
-def favorite_vegetables(first, second, *args):
-    print(f"My favorite vegetables are {first} and {second}.")
-    if args:
-        print("Others are .", args)
-
-favorite_vegetables("だいこん", "なす")
-# My favorite vegetables are だいこん and なす.
-
-favorite_vegetables("だいこん", "なす", "きゅうり", "きゃべつ")
-# My favorite vegetables are だいこん and なす.
-# Others are  ('きゅうり', 'きゃべつ').
-
-favorite_vegetables("だいこん") # 実引数が足りない
-# Traceback (most recent call last):
-#   File "<stdin>", line 1, in <module>
-# TypeError: favorite_vegetables() missing 1 required positional argument: 'second'
-```
-
-#### 可変長キーワード引数
-
-関数の引数に`**`が付いている引数は、位置引数、可変長位置引数に続く複数の名前付き引数をdictとして受け取る**可変長キーワード引数**です。
-
-```python
-def personal_info(name, age, country, **kwargs):
-    print(f"I am {name}, {age} years old.")
-    print(f"I came from {country}.")
-    for key, values in kwargs.items():
-        print(f"My {key} is {values}.")
-
-personal_info("Taro", 20, "Japan", height=170, weight=60)
-# I am Taro, 20 years old.
-# I came from Japan.
-# My height is 170.
-# My weight is 60.
-```
-
-#### 可変長位置／キーワード引数を受け取る関数の節度ある定義
-
-例えば、可変長位置引数と可変長キーワード引数を受け取る次のような関数を定義すると、関数にどのような実引数を渡しても関数を呼び出すことができます。
-
-```python
-def foo(*args, **kwargs):
-    pass
-
-foo()
-foo(1, "x")
-foo(1, "x", bar=3, baz="y")
-```
-
-しかし、可変長引数の過度な利用は、仮引数の数など関数の仕様を把握することが難しくなります。
-また、誤った実引数を与えた場合に、ランタイムがプログラムをクラッシュさせる**安全装置**が機能しなくなります。
-
-> ソフトウェアが誤動作するよりもクラッシュ（停止）することは、ソフトウェアに求められる要件の1つです。
-
-可変長引数を受け取る関数は、本当に必要な場合にのみ定義することを推奨します。
-可変長引数を受け取る関数を定義した場合、その関数が受け取る位置引数やキーワード引数の説明をコメントとして必ず記述してください。
 
 ### スコープ
 
@@ -1290,307 +947,16 @@ if __name__ == "__main__":
 変数と関数のスコープの動画:
 <https://dainichiconsul.box.com/s/9n2uw6pqdnq13chpzddvvwg3c1ui6vbd>
 
-プロジェクトディレクトリに`scopes1.py`ファイルを作成して、次のコードを入力／実行してください。
-スコープの外れた変数を出力する`print`関数をコメントアウトしていおり、プログラムはエラーなしで実行されます。
-
-しかし、それぞれの`print`関数をコメントアウトを解除して実行すると、エラー（例外）が発生します。
-実際に片方ずつ`print`関数のコメントを解除及び実行して、エラー（例外）が発生することを確認してください。
-
-```python
-def foo():
-    x = 1
-    print("I have x in foo: ", x)
-
-
-if __name__ == "__main__":
-    # 変数`x`は`foo`関数のスコープで宣言されているため参照できない
-    # print(x)  # `print`文の`#`を削除すると、実行時にエラー（例外）が発生
-
-    # `foo`関数はモジュール（ファイル）レベルで宣言されているためスコープ内
-    foo()
-
-    if True:
-        y = 2
-
-    # 知らんかった
-    # 右に記述したことは誤り: 変数`y`は`if`文のスコープで宣言されているため参照できない
-    print(y)
-
-    if True:
-        # 変数`z`はさらにネストした`if`文で宣言されているため参照できない
-        # print(z)
-        if True:
-            z = 10
-```
-
-関数の外で宣言された**グローバル変数**は、そのファイル全体をスコープとするグローバルスコープを持ちます。
-関数内で変更不可能（**イミュータブル**）なデータ型のグローバル変数を利用するためには、そのグローバル変数を利用する前に、`global`キーワードでグローバル変数を利用することを宣言する必要があります。
-
-プロジェクトディレクトリに`scopes2.py`ファイルを作成して、次のコードを入力／実行してください。
-
-```python
-import sys
-
-x = 100
-
-
-def foo():
-    # 関数内でグローバル変数の参照を試行
-    # しかし、変数がローカルスコープで束縛されていない（宣言されていない）ことを
-    # 示す`UnboundLocalError`例外が発生するため、例外処理してプログラムが
-    # クラッシュすることを避ける
-    try:
-        print("x in foo func:", x)
-    except UnboundLocalError as e:
-        print(f"UnboundLocalError: {e}", file=sys.stderr)
-
-    # 関数内でグローバル変数と同じ名前の変数を宣言
-    # この変数`x`は`foo`関数のローカル変数であり、`foo`関数の終了とともに破棄される。
-    # また、グローバル変数`x`は、見えなくなる
-    x = 300
-    print("x is a local variable in foo func:", x)
-
-
-def bar():
-    # `x`はグローバル変数であることを宣言
-    global x
-
-    # 関数内でグローバル変数`x`を参照
-    print("x in bar func:", x)
-
-    # 関数内でグローバル変数`x`の値を変更
-    x = 400
-    print("x was changed in bar func:", x)
-
-
-if __name__ == "__main__":
-    # 関数の外でグローバル変数`x`を参照
-    print("x:", x)
-
-    # 関数の外でグローバル変数`x`の値を変更
-    x = 200
-    print("x after changing:", x)
-
-    print("\n--- go to foo func ---")
-    foo()
-    print("--- return from foo func ---\n")
-
-    print("x:", x)
-
-    print("\n--- go to bar func ---")
-    bar()
-    print("--- return from bar func ---\n")
-
-    print("x:", x)
-
-    # グローバル変数`x`が400でない場合、プログラムがクラッシュ
-    assert x == 400
-```
-
-グローバル変数の使用はプログラムが複雑になると、プログラムの見通しが悪くなるため、避けることが推奨されます。
-実際にグローバル変数を使用する場面は少ないです。
-変数を宣言後、関数の引数として渡すことを推奨します。
-
-> Pythonは、`if`、`for`などほとんどの制御文でスコープを形成せず、関数のみ（内包表記も）スコープを形成するなど独特です。
-> ほとんどの言語では、すべての制御文（式）でスコープを形成するため、Pythonのスコープを意識した変数の利用は、混乱の元になるため、避けることが推奨されます。
-
-```python
-import sys
-
-
-def print_exception(e: Exception) -> None:
-    print(f"{e.__class__.__name__}: {e}", file=sys.stderr)
-
-
-# `if`文
-if True:
-    a = 1
-try:
-    print(a)
-except UnboundLocalError as e:
-    print_exception(e)
-
-# `for`文
-for _ in range(5):
-    b = 2
-try:
-    print(b)
-except Exception as e:
-    print_exception(e)
-
-# `while`文
-i = 0
-while i < 3:
-    c = 3
-    i += 1
-try:
-    print(c)
-except Exception as e:
-    print_exception(e)
-
-# 例外処理(tryブロック)
-try:
-    f = 4
-except:
-    pass
-try:
-    print(f)
-except Exception as e:
-    print_exception(e)
-
-# 例外処理(exceptブロック)
-try:
-    raise Exception
-except:
-    g = 5
-try:
-    print(g)
-except Exception as e:
-    print_exception(e)
-
-
-# コンテキストマネージャ
-with open("scopes3.py", "rt") as f:
-    j = 6
-try:
-    print(j)
-except Exception as e:
-    print_exception(e)
-
-
-# 関数
-def func() -> None:
-    h = 7
-
-
-try:
-    print(h)
-except Exception as e:
-    print_exception(e)
-```
-
-- 上記スクリプトの実行結果
-
-```text
-1
-2
-3
-4
-5
-6
-NameError: name 'h' is not defined
-```
-
-### イミュータブルとミュータブルなデータ型
-
-Pythonのデータ型は、**イミュータブル**と**ミュータブル**に分類され、それぞれ**変更不可**、**変更可能**を意味します。
-
-- イミュータブルなデータ型
-  - bool、int、float、complex（複素数）、str、tupleなど
-- ミュータブルなデータ型
-  - list、dict、setなど
-
-ミュータブルなデータ型のグローバル変数を関数内で利用するとき、グローバル変数を利用する前の`global`宣言は必要ありません。
-
-これまでの例では、int型の変数に対して算術演算をして、変数の値を変更してきました。
-しかし、Pythonにおいて計算結果は、演算前の変数のメモリ位置に保存されるのではなく、新しいメモリ位置に計算結果が格納され、それをその変数で参照できるように動作します。
-
-ターミナルでインタープリタを起動して、次を確認してください。
-
-> `id`関数の実行結果は、実行する環境または実行するたびに異なります。
-
-```python
->>> a = 43
->>> hex(id(a))
-'0x101af9320'
->>>
->>> a += 1
->>> hex(id(a))
-'0x101af9340'
->>> a
-44
->>>
->>> s = "0123"
->>> hex(id(s))
-'0x100d16670'
->>> s += "asdf"
->>> hex(id(s))
-'0x100d5ecf0'
->>> s
-'0123asdf'
-```
-
-Pythonの標準の動作環境（ランタイム）であるCPythonは、`id`関数で変数のメモリ位置を確認できます。
-演算前の変数`a`のメモリ位置は16進数で`0x101af9320`でしたが、演算後の変数`a`のメモリ位置は`0x101af9340`に変更されています。
-したがって、演算前に`a`という**ラベル**で参照されていたメモリ位置のデータ（バイト列）は変更されておらず、int型はイミュータブルです。
-これはstr型も同様です。
-
-dict型は、int型やstr型と異なり**ミュータブル**です。
-
-```python
->>> d = {}
->>> hex(id(d))
-'0x100d0f280'
->>>
->>> d["foo"] = 1
->>> hex(id(d))
-'0x100d0f280'
->>> d
-{'foo': 1}
-```
-
-要素なしで作成した辞書`d`のメモリ位置は`0x100d0f280`で、要素を追加した後もメモリ位置は変更されていません。
-よって、dict型はミュータブルです。
-
-> 実は、Pythonは、イミュータブルな型について、他の言語とはさらに異なる動作をします。
-> 例えば、イミュータブルな型の同じ値を持つ変数を2つ宣言したとき、効率性を求めてその変数は同じメモリ位置を示し、同じ値を2つメモリに配置しません。
-> イミュータブルな型は、異なる値を持ったとき、初めて別のメモリ位置に異なる値を確保します。
-> この仕組みを**インターニング(interning)**と呼びます。
-> インターニングは、イミュータブルな新しい値を生成するときに、同じ値がすでにメモリに確保されていないか検索して、確保されているのであれば、そのメモリ位置に**ラベル**をつけます。
-> もし、同じ値がメモリに確保されていないのであれば、空きのあるメモリ位置に値を格納して、そのメモリ位置に**ラベル**をつけます。
->
-> ミュータブルな型は、内容が同じでも異なるメモリ位置を示します。
-
-```python
->>> a = 43
->>> b = 43
->>> id(a) == id(b)
-True
->>> b += 1
->>> a
-43
->>> b
-44
->>> id(a) == id(b)
-False
->>>
->>> x = "abc"
->>> y = "abc"
->>> id(x) == id(y)
-True
->>> y += "d"
->>> id(x) == id(y)
-False
->>>
->>> d1 = {}
->>> d2 = {}
->>> id(d1) == id(d2)
-False
-```
+なお、関数の外で宣言された**グローバル変数**は、そのファイル全体をスコープとするグローバルスコープを持ちます。
+グローバル変数の使用はプログラムが複雑になると、プログラムの見通しが悪くなるため、可能な限り使用を避けることが推奨されます。
 
 ### プログラムの制御構造
 
-Pythonにおけるプログラムの制御構造には、次のようなものがあります（制御構造と言えないものも含まれています）。
+Pythonにおけるプログラムの制御構造には、次のようなものがあります。
 
 - 順次
 - 分岐
-  - 三項演算子
 - 繰り返し
-- 例外処理
-- 再帰
-- yield
-- コンテキストマネージャ
-- 非同期処理
 
 #### 順次
 
@@ -1639,47 +1005,12 @@ else:
     すべての条件が成立しなかったときに実行したいコード
 ```
 
-Pythonでは、 intの`0`、floatの`0.0`、`None`、空の文字列、空のリスト、空のタプル、空の辞書、空の集合は、`False`として扱われます。
-
-```python
->>> any((False, 0, 0.0, None, "", [], (), {}, set()))
-False
-```
-
-##### 三項演算子（みたいな制御構造）
-
-プログラムを実装しているとき、条件によって変数に異なる値を代入したい場合があります。
-上記で説明した通常の`if`文を使用するとコードが冗長になるため、`x = val1 if 条件 else val2`という形式の三項演算子があります。
-
-プロジェクトディレクトリに`ternary_operator.py`ファイルを作成して、次のコードを入力／実行してください。
-`if`文で処理した結果と、三項演算子で処理した結果が同じであることを確認してください。
-
-```python
-import random
-
-# 1から100までの範囲の整数をランダムで生成
-n = random.randint(1, 100)
-
-# 通常の`if`文で分岐して適切な値を得る
-if n % 2 == 0:
-    s = "even"
-else:
-    s = "odd"
-print(s)
-
-# 上記`if`文の処理と同じ結果を三項演算子を使用して簡潔に取得
-s = "even" if n % 2 == 0 else "odd"
-print(s)
-```
-
-> C言語における三項演算子は、`(条件) ? (真の場合の値) : (偽の場合の値)`という形式です。
-
 #### 繰り返し
 
 Pythonでは、`for`文と`while`文を使用して、繰り返し構造を実装します。
 
 - `for`文
-  - リスト、タプル、辞書、集合、文字列などの要素を順番に取り出して処理
+  - リスト、辞書など要素を順番に取り出して処理
   - `range`関数を使用して、指定した回数だけ繰り返し処理を行う
 - `while`文
   - 条件が成立している間、処理を繰り返し実行
@@ -1731,524 +1062,6 @@ while True:
     print("infinite loop")
     time.sleep(1)
 ```
-
-#### 例外処理
-
-ファイルを開くコードは、ファイルが存在しない場合など、処理に失敗することがあります。
-また、文字列を正数に変換するコードは、文字列が数字で構成されていない場合、処理に失敗します。
-失敗が発生してもプログラムがクラッシュしないように、失敗する可能性がある処理に対して例外処理します。
-
-Pythonでは、`try`文と`except`文を使用して、例外処理を実装します。
-`try`ブロックには失敗する可能性のある処理を記述します。
-`except`では、その失敗を捕捉する例外クラスを指定して、そのブロックで捕捉した例外に対応する処理を記述します。
-
-```python
-try:
-    # 失敗する可能性がある処理
-except 例外クラス1 as 変数:
-    # 例外クラス1が失敗を捕捉したときに実行したい処理
-except 例外クラス2 as 変数:
-    # 例外クラス2が失敗を捕捉したときに実行したい処理
-except (例外クラス3, 例外クラス4, ..., 例外クラスm) as 変数:
-    # 例外クラス3から例外クラスmまでが失敗を捕捉したときに実行したい処理
-...
-except 例外クラスn as 変数:
-    # 例外クラスnが失敗を捕捉したときに実行したい処理
-except Exception as 変数:
-    # 上記例外クラスが捕捉できない失敗が発生したときに実行したい処理
-```
-
-プロジェクトディレクトリに`exception_handling.py`ファイルを作成して、次のコードを入力／実行してください。
-
-最初のファイルを開く処理では、ファイルが存在しないため、`FileNotFoundError`例外が発生しますが、適切に例外処理をしているため、プログラムはクラッシュしないことを確認してください。
-
-次のファイルを開く処理では、例外処理をしていないため、存在しないファイルを開いたとき、プログラムがクラッシュします。
-
-```python
-import sys
-
-path = "non-existent-file.txt"
-print("例外処理開始")
-try:
-    f = open(path, "rt")
-except FileNotFoundError as e:
-    print(f"no such a file: {e}", file=sys.stderr)
-except Exception as e:
-    print(f"unexpected exception raised: {e}", file=sys.stderr)
-print("例外処理終了\n")
-
-# 例外処理なし
-f = open(path, "rt")
-```
-
-#### 再帰
-
-関数が自分自身を呼び出すことを再帰と呼びます。
-上記で提示した`fibonacci`関数は再帰関数です。
-
-```python
-def fibonacci(n):
-    if n == 0:
-        return 0
-    elif n == 1:
-        return 1
-    # 関数自身を再度呼び出し
-    return fibonacci(n - 2) + fibonacci(n - 1)
-```
-
-整数の階乗(`n!`)を求める処理を再帰関数で実装できます。
-プロジェクトディレクトリに`factorial.py`ファイルを作成して、次のコードを入力／実行してください。
-
-```python
-def factorial(n):
-    if n == 0:
-        return 1
-    return n * factorial(n - 1)
-
-
-if __name__ == "__main__":
-    value = factorial(10)
-    print(value)
-```
-
-次の動画をダウンロード／再生して、再帰関数が処理される様子を確認してください。
-
-再帰関数の動作:
-<https://dainichiconsul.box.com/s/q0ot0pxg31p6qm7z5l9e5g7iv7y2ckn0>
-
-なお、再帰関数は、再帰なしの関数に変換できます。
-
-```python
-def factorial(n: int) -> int:
-    result = 1
-    for m in range(2, n + 1):
-        result *= m
-    return result
-
-
-if __name__ == "__main__":
-    print(factorial(10))
-```
-
-さらに、`functools.reduce`と**ラムダ式**を使用すると、1行で階乗を求めることができます。
-
-```python
->>> import functools
->>> functools.reduce(lambda x, y: x * y, range(1, 11))
-3628800
-```
-
-ラムダ式は、無名関数を定義するための構文ですが、Pythonのラムダ式は1つの式しか記述できません。
-
-#### yield（いーるど）
-
-`yield`は、**関数を一時的に中断して現時点での値を返し、次回の呼び出し時に中断した箇所から再開**する制御構造です。
-
-`list`、`tuple`、`dict`、`set`、`str`などは、順に要素を取り出すことができる**イテラブル**なオブジェクトであるため、`for`文の`in`で要素を順に取り出して処理することができます。
-
-`yield`を説明するためには、**ジェネレーター**や**イテレーター**などの概念を理解する必要があるため、次の説明は参考として紹介します。
-
----
-
-`list`は**イテラブル**であり、反復操作可能な**イテレーター**を返す***スペシャルメソッド**`__iter__`を実装しています。
-イテレーターは、スペシャルメソッド`__next__`メソッドを実装しており、次の要素を返すことができます。
-もし、次の要素がない場合、`StopIteration`例外を発生させます。
-
-`for`文でイテレーターを使用すると、`StopIteration`例外が発生するまで、要素を順に取り出して処理します。
-このとき、`for`文は`StopIteration`例外を適切に例外処理するため、プログラムがクラッシュすることはありません。
-
-```python
-# ./iterator.py
-from typing import Self
-
-
-# `max - 1`までの数値を順番に返すイテレーター
-class NumberIterator:
-    def __init__(self, max: int) -> None:
-        self.max = max
-        self.current = 0
-
-    def __iter__(self) -> Self:
-        return self
-
-    def __next__(self) -> int:
-        if self.max <= self.current:
-            raise StopIteration()
-        returning = self.current
-        self.current += 1
-        return returning
-
-
-iter = NumberIterator(5)
-for value in iter:
-    print(value)
-
-print()
-
-iter = NumberIterator(5)
-print(iter.__next__())  # 0
-print(iter.__next__())  # 1
-print(iter.__next__())  # 2
-print(iter.__next__())  # 3
-print(iter.__next__())  # 4
-print(iter.__next__())  # StopIteration例外発生
-```
-
-**ジェネレーター**は、`yield`を使用して、関数を一時的に中断して値を返し、次回の呼び出し時に中断した箇所から再開することができる関数です。
-前にコードで使用した`range`関数は**ジェネレーター関数**で、`yield`を使用して、一時的に関数の処理を中断しながら、指定した範囲の数値を順に返しています。
-**ジェネレーター**は、**イテレーター**です。
-
-```python
-from typing import Generator
-
-
-# `max - 1`までの値を順に返すジェネレーター関数
-def number_generator(max: int) -> Generator[int, None, None]:
-    for i in range(max):
-        yield i
-
-
-for value in number_generator(5):
-    print(value)
-
-print()
-
-iter = number_generator(5)
-print(iter.__next__())  # 0
-print(iter.__next__())  # 1
-print(iter.__next__())  # 2
-print(iter.__next__())  # 3
-print(iter.__next__())  # 4
-print(iter.__next__())  # StopIteration例外発生
-```
-
-#### コンテキストマネージャ
-
-通常プログラムは、ファイルを開いた後に、コンピューター資源を効率的に使用するために、ファイルを閉じる必要があるなど後処理が必要です。
-Pythonは、コンテキストマネージャで自動的に後処理する機能を提供しています。
-通常、コンテキストマネージャは`with`文で構築されます。
-
-```python
-# ファイルを開く
-f = open("file.txt", "rt")
-
-#
-# ファイルを使用した何らかの処理
-#
-
-# ファイルを閉じる
-f.close()
-
-# 例外ハンドラ
-try:
-    # コンテキストマネージャを使用したファイルの自動クローズ
-    with open("file.txt", "rt") as f:
-        #
-        # ファイルを使用した何らかの処理
-        #
-    #
-    # プログラムが`with`ブロックから出ると、ファイルが自動的に閉じられる
-    #
-except FileNotFoundError as e:
-    #
-    # ファイルが存在しないときの処理
-    #
-```
-
-コンテキストマネージャは、データベースに接続した後、その接続を自動で閉じるときにも使用できます。
-また、コンテキストマネージャは、自分で独自に定義することもできます。
-
-#### 非同期処理
-
-**非同期処理**について簡単に説明します。
-
-非同期処理は、複数の処理を**並列**で実行することができるプログラムの制御構造です。
-なお、並列とは、ある**瞬間**に複数の処理を実行することを、**並行**とは、ある**時間範囲**で複数の処理を実行することを指します。
-
-> 2つのタスクを実行する並行処理では、ある瞬間にあるタスクは実行されているが、もう一方のタスクが停止していることがあります。
-
-非同期処理は[C10K問題](https://ja.wikipedia.org/wiki/C10K%E5%95%8F%E9%A1%8C)などの問題を解決するなど、CPU資源を有効に活用します。
-
-C10K問題とは、次のような問題です。
-
-あるWebサーバーは、接続1つ1つに対して**プロセス**を生成する仕様になっています。
-WindowsやLinux系のOSでは、同時に起動できるプロセス数に制限があり、この制限を超えると新たなプロセスを作成できなくなり、レスポンスタイムが遅くなります。
-また、接続1つ1つに対して**スレッド**を生成する仕様でも、並列で処理するスレッドの数が多くなり、リソース不足になります。
-
-非同期処理は、1つのプロセスで複数のタスクを同時に処理できるように、時間がかかる処理があった場合、その処理を中断して他の処理を実行します。
-そして、時間がかかる処理が終了したら、その処理を再開するように動作します。
-
-非同期処理は、現在注目されている技術で、主要なプログラミング言語は非同期処理をサポートしています。
-
-Pythonには、非同期処理を行う`asyncio`パッケージと`async`、`await`キーワードがあります。
-
-### 内包表記
-
-**内包表記**は、`list`や`dict`などのコレクションから（またはイテレーターから）、別のコレクションを生成する簡潔な手段です。
-
-プロジェクトディレクトリに`comprehensions.py`ファイルを作成して、次のコードを入力／実行してください。
-
-```python
-# 0から9の整数を生成して、生成した値を2乗した値を持つリストを作成
-l1 = []
-for n in range(10):
-    l1.append(n**2)
-print(l1)
-
-# 上記をリスト内包表記で実装
-l2 = [n**2 for n in range(10)]
-print(l2)
-assert l1 == l2
-
-# 上記リストから奇数のみを抽出
-l3 = [n for n in l1 if n % 2 == 1]
-print(l3)
-
-# 0から9をキーに、それらを2乗した値を持つ辞書を作成
-d1 = {n: n**2 for n in range(10)}
-print(d1)
-```
-
-内包表記は、`for`文を使用して別のコレクションを作成するよりも簡潔で読みやすく、`list`の`append`メソッドを取得する必要がないため高速に処理できます。
-
-Pythonでは、オブジェクトのメソッドを変数に取得することができるため、実行速度を改善できます。
-
-```python
->>> l = []
->>> m = l.append
->>> for n in range(10):
-...     m(n**2)
-...
->>> print(l)
-[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
->>>
-```
-
-しかし、`for`文を実行するコストが残るため、内包表記の方が高速なようです。
-
-1億回の繰り返しを行い、その結果をリストに格納する処理を、内包表記と`append`メソッド取得で処理時間を計測した結果を次に示します。
-
-| 処理方法             | 実行時間(secs) |
-| -------------------- | -------------: |
-| 内包表記             |          3.503 |
-| `append`メソッド取得 |          4.120 |
-
-- 内包表記
-
-```python
-import time
-
-started = time.time()
-l = [n for n in range(100_000_000)]
-finished = time.time()
-elapsed = finished - started
-print(f"{elapsed:.3f} seconds")
-```
-
-- appendメソッド取得
-
-```python
-import time
-from typing import List
-
-started = time.time()
-l: List[int] = []
-m = l.append
-for n in range(100_000_000):
-    m(n)
-finished = time.time()
-elapsed = finished - started
-print(f"{elapsed:.3f} seconds")
-```
-
-オブジェクトのメソッドを変数に取得して呼び出すテクニックや、複数ある引数をある値で固定するテクニックは、実際の実装でもよく現れるため、覚えておくと便利です。
-
-なお、複数の引数を取る関数を、引数が「元の関数の最初の引数」で、戻り値が「元の関数の残りの引数を受け取り、結果を返す関数」にすることを**カリー化**と呼びます。
-上記例では、関数の最初の引数はlist自身(`self`)で、残りの引数は追加する要素です。
-Pythonでは次は等価で、上記例は、list型の`append`メソッドの最初の引数を`l`に固定しています。
-
-```python
->>> l1 = []
->>> l1.append(1)
->>> l2 = []
->>> list.append(l2, 1)
->>> l1 == l2
-True
->>> l1
-[1]
->>> l2
-[1]
-```
-
-一方、複数ある引数のいくつかをある値で固定化することを、**部分適用**と呼びます。
-
-### デコレーター
-
-前にフィボナッチ数を計算しましたが、項が大きくなると処理時間が急激に増加します。
-処理時間が急激に増加する理由は、同じ項のフィボナッチ数を何度も計算しているためです。
-フィボナッチ数を計算する回数を次に示します。
-
-- 項0: f(0): 1
-- 項1: f(1): 1
-- 項2: f(2), f(1), f(2): 3
-- 項3: f(3), f(1), f(2), f(0), f(1): 5
-- 項4: f(4), f(2), f(0), f(1), f(3), f(1), f(2), f(0), f(1): 9
-- 項5: f(5), f(3), f(1), f(2), f(0), f(1), f(4), f(2), f(0), f(1), f(3), f(1), f(2), f(0), f(1): 15
-- 項6: 25
-- 項7: 41
-- 項8: 67
-- 項9: 109
-- 項10: 177
-- 項11: 287
-- 項12: 465
-- 項13: 753
-- ...
-- 項45: 3,672,623,805
-
-フィボナッチ数の計算を**メモ化**と呼ばれる次の手法で高速化します。
-
-- フィボナッチ数を計算後、項とフィボナッチ数を辞書に格納
-- フィボナッチ数を計算するとき、辞書に計算する項が存在する場合、その計算されたフィボナッチ数を返す
-
-```python
-# ./memorized_fibonacci.py
-import sys
-
-# マイクロ秒単位で計測するため`datetime`パッケージをインポート
-from datetime import datetime
-
-# 項とフィボナッチ数を格納する辞書
-d: dict[int, int] = {}
-
-
-def fibonacci(n):
-    # dict型はミュータブルであるため、global宣言は不要
-    # 辞書に項が格納されていれば、その値を返す
-    if n in d:
-        return d[n]
-
-    if n == 0:
-        return 0
-    elif n == 1:
-        return 1
-    value = fibonacci(n - 2) + fibonacci(n - 1)
-    d[n] = value
-    return value
-
-
-if __name__ == "__main__":
-    args = sys.argv
-    if len(args) != 2:
-        print("expected one argument", file=sys.stderr)
-        sys.exit(1)
-    try:
-        n = int(args[1])
-    except ValueError:
-        print("expected an integer number", file=sys.stderr)
-        sys.exit(1)
-
-    # フィボナッチ数を求める
-    started = datetime.now()
-    value = fibonacci(n)
-    finished = datetime.now()
-    elapsed = finished - started
-    # 経過時間をマイクロ秒で取得
-    micro_secs = elapsed.microseconds
-    print(f"fibonacci value: {value} ({micro_secs} micro seconds)")
-```
-
-| 言語             | 実行時間(micro secs) |
-| ---------------- | -------------------: |
-| Python(メモ化版) |                   16 |
-
-> マイクロ秒は、1秒の100万分の1秒です。
-
-単純にフィボナッチ数を計算するRustのプログラムより、処理時間が著しく短くなりました。
-
----
-
-Pythonは、`functools`パッケージに、関数の戻り値をキャッシュする**デコレーター**をいくつか提供しています。
-
-デコレーターは、デコレーターで修飾した関数を実行する前または後に、処理を追加するものです。
-
-上記コードを`@functools.cache`デコレーターで再実装します。
-
-```python
-# ./cached_fibonacci.py
-import sys
-import functools
-from datetime import datetime
-
-
-@functools.cache
-def fibonacci(n):
-    if n == 0:
-        return 0
-    elif n == 1:
-        return 1
-    return fibonacci(n - 2) + fibonacci(n - 1)
-
-# 省略
-```
-
-| 言語                 | 実行時間(micro secs) |
-| -------------------- | -------------------: |
-| Python(メモ化版)     |                   16 |
-| Python(デコレーター) |                   17 |
-
-処理時間はほぼ同じですが、グローバル変数を使用していないため、関数の再利用性が向上します。
-よって、自身でメモ化を実装するのではなく、`@functools.cache`デコレーター使用することをお勧めします。
-
-ただし、メモ化は、キャッシュするためのメモリを消費するため、メモリ使用量に注意してください。
-メモリの消費が気になる場合は、`@functools.lru_cache`デコレーターを使用することで、最近利用されたキャッシュのみを残すようにできます。
-
----
-
-デコレーターは、独自に実装することができます。
-
-プロジェクトディレクトリに`decorators.py`ファイルを作成して、次のコードを入力／実行してください。
-
-`foo`関数の呼び出しが、`print_deco`で修飾され、実際の`foo`関数を実行する前に`--- start ---`、関数を実行した後に`--- end ---`が標準出力に出力されます。
-
-`foo`関数が`@print_deco`で修飾されると、`print_deco`関数に`foo`関数が`func`引数として渡され、`wrapper`関数が返されます。
-`foo`関数を呼び出したとき、実際に実行されるのは、返却された`wrapper`関数で、`wrapper`関数の中で`foo`関数が呼び出されます。
-
-```python
-from typing import Callable
-
-
-# デコレーター
-def print_deco(func) -> Callable[[int, int], int]:
-    # print_deco関数が返す関数
-    def wrapper(n: int, m: int) -> int:
-        # 追加の前処理
-        print("--- start ---")
-
-        result = func(n, m)
-
-        # 追加の後処理
-        print("--- end ---")
-        return result
-
-    # 関数を返す
-    return wrapper
-
-
-# デコレーターで修飾
-@print_deco
-def foo(n: int, m: int) -> int:
-    value = n + m
-    print(f"foo will return {value}")
-    return value
-
-# 単純な`foo`関数の呼び出しが、デコレーターにより加工された関数呼び出しになっている
-value = foo(10, 12)
-assert value == 22
-```
-
-Pythonのデコレーターが機能する理由を知りたい人は、[Pythonのデコレータを理解するための12Step](https://qiita.com/_rdtr/items/d3bc1a8d4b7eb375c368)を参照してください。
-
-なお、Pythonの関数は、変数に代入できたり、関数の引数や戻り値に指定できる**高階関数**です。
 
 ## 外部パッケージの利用
 
