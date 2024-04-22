@@ -1,6 +1,6 @@
-# Python概要 for Windows
+# Python概要 for Windows（簡易版）
 
-- [Python概要 for Windows](#python概要-for-windows)
+- [Python概要 for Windows（簡易版）](#python概要-for-windows簡易版)
   - [はじめに](#はじめに)
   - [Pythonの簡単な説明](#pythonの簡単な説明)
     - [Pythonの特徴](#pythonの特徴)
